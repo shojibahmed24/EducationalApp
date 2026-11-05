@@ -1,0 +1,65 @@
+// Route: /profile
+// Stats are NOT hard-coded numbers: streak / medals / saved are
+// filled in from progress_service.summary() + LocalStore.savedQuestions()
+// (see profile_screen.dart), with {n} replaced by the real count.
+// weekTime has NO real store behind it (nothing tracks study hours),
+// so it is an honest empty state, never a number.
+// studentIdPrefix is only a label: the ID line itself is shown ONLY
+// when the saved profile holds an 'id' (profile_screen.dart); with no
+// stored id the line is hidden entirely, never a made-up number.
+const Map<String, String> profileStringsBn = {
+  'title': 'প্রোফাইল',
+  'student': 'শিক্ষার্থী',
+  'classInfo': '১০ম শ্রেণি • বিজ্ঞান বিভাগ',
+  'studentIdPrefix': 'আইডি:',
+  'streak': '{n} দিন টানা পড়াশোনা',
+  'medals': '{n}টি অর্জিত মেডেল',
+  'saved': '{n}টি সংরক্ষিত প্রশ্ন',
+  'weekTime': 'পড়ার সময়ের তথ্য এখনো নেই',
+  'myInfo': 'আমার তথ্য ও সেটিংস',
+  'myInfoSub': 'শিক্ষার্থীর বিবরণ, ভাষা ও অ্যাপ সেটিংস বদলাও',
+  'savedQ': 'সেভ করা প্রশ্ন',
+  'savedQSub': 'রিভিশনের জন্য চিহ্নিত নোট',
+  'parentMode': 'অভিভাবক মোড',
+  'parentModeSub': 'অগ্রগতি রিপোর্ট, পিন সক্রিয়',
+  'premium': 'প্রিমিয়াম সদস্য (প্রো)',
+  'premiumSub': 'ভয়েস টিউটর ও এআই সমাধান',
+  'notifications': 'নোটিফিকেশন',
+  'notificationsSub': 'আপডেট ও রিমাইন্ডারের তালিকা',
+  'about': 'অ্যাপ সম্পর্কে',
+  'aboutSub': 'Yes Sir AI, ভার্সন ও শর্তাবলী',
+  'help': 'সাহায্য ও সাপোর্ট',
+  'helpSub': 'প্রায়শই জিজ্ঞাসিত প্রশ্ন',
+  'signOut': 'সাইন-আউট',
+  'signOutSub': 'অ্যাকাউন্ট থেকে সাময়িক বিরতি',
+  'quote': 'প্রতিদিনের ছোট ছোট অনুশীলনই পরীক্ষার দিনে সেরা ফল নিয়ে আসে।',
+  'version': 'Yes Sir AI • ভার্সন ১.০.০+১',
+};
+const Map<String, String> profileStringsEn = {
+  'title': 'Profile',
+  'student': 'Student',
+  'classInfo': 'Class 10 • Science',
+  'studentIdPrefix': 'ID:',
+  'streak': '{n}-day study streak',
+  'medals': '{n} medals earned',
+  'saved': '{n} saved questions',
+  'weekTime': 'No study-time data yet',
+  'myInfo': 'My info & settings',
+  'myInfoSub': 'Edit student details, language and app settings',
+  'savedQ': 'Saved questions',
+  'savedQSub': 'Notes marked for revision',
+  'parentMode': 'Parent mode',
+  'parentModeSub': 'Progress report, PIN active',
+  'premium': 'Premium member (Pro)',
+  'premiumSub': 'Voice tutor and AI solutions',
+  'notifications': 'Notifications',
+  'notificationsSub': 'List of updates and reminders',
+  'about': 'About the app',
+  'aboutSub': 'Yes Sir AI, version and terms',
+  'help': 'Help and support',
+  'helpSub': 'Frequently asked questions',
+  'signOut': 'Sign out',
+  'signOutSub': 'Take a break from this account',
+  'quote': 'Small daily practice brings the best result on exam day.',
+  'version': 'Yes Sir AI • Version 1.0.0+1',
+};

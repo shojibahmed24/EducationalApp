@@ -1,0 +1,58 @@
+name: yes_sir_ai
+description: Yes Sir AI - AI tutor for classes 1-10, Bangla and English.
+publish_to: "none"
+version: 1.0.0+1
+environment:
+  sdk: ">=3.8.0 <4.0.0"
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  go_router: 14.8.0
+  flutter_riverpod: 2.6.1
+  supabase_flutter: 2.9.0
+  in_app_purchase: 3.2.1
+  shared_preferences: 2.3.0
+  connectivity_plus: ^6.1.0
+  # Parent PIN v2 hash (2026-10-31): per-PIN salt + iterated SHA-256.
+  # Was transitive via supabase_flutter; now a direct dependency so
+  # parent_pin_store.dart imports it explicitly.
+  crypto: 3.0.8
+  # Batch 2, item 6: Settings profile picture (gallery/camera pick).
+  image_picker: 1.2.0
+  # Batch 2, item 6: app-documents copy of the picked picture, so
+  # the avatar survives the picker's cache being cleared.
+  path_provider: 2.1.5
+  # Solution display: block renderer + real LaTeX math rendering
+  # for formulas (never caret-text). flutter_markdown was removed
+  # 2026-10-31: grep-verified unused after the audit-fix round
+  # (SolutionBlocks replaced the MarkdownBody fallback).
+  flutter_math_fork: ^0.7.0
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: 4.0.0
+flutter:
+  uses-material-design: true
+  # Hind Siliguri, SIL OFL 1.1 (fonts/OFL.txt, Indian Type
+  # Foundry) — verified 2026-10-29: 5 TrueType weights, all with
+  # GSUB/GPOS/GDEF shaping tables for Bengali conjuncts. Used by
+  # the answer screen's renderer for Bangla text only; the
+  # app-wide default fontFamily is unchanged (see app_theme.dart).
+  fonts:
+    - family: HindSiliguri
+      fonts:
+        - asset: fonts/HindSiliguri-Light.ttf
+          weight: 300
+        - asset: fonts/HindSiliguri-Regular.ttf
+          weight: 400
+        - asset: fonts/HindSiliguri-Medium.ttf
+          weight: 500
+        - asset: fonts/HindSiliguri-SemiBold.ttf
+          weight: 600
+        - asset: fonts/HindSiliguri-Bold.ttf
+          weight: 700
+  assets:
+    - assets/logo/yes-sir-ai-icon.png
+    - assets/logo/yes-sir-ai-logo-horizontal.png

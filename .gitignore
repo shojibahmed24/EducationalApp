@@ -1,0 +1,20 @@
+# Flutter / Dart (generated)
+.dart_tool/
+.build/
+build/
+.pub-cache/
+.pub/
+.flutter-plugins-dependencies
+# Gradle
+.gradle/
+android/.gradle/
+# Android local config (machine-specific paths)
+android/local.properties
+# Local Supabase dev data (gigabytes, never push)
+supabase/
+# Reference screenshots (not app source)
+stitch-reference/
+# Logs
+*.log
+# OS
+.DS_Store

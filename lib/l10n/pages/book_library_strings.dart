@@ -1,0 +1,33 @@
+// book_library page strings - bn + en, written with the screen (page-wise rule).
+const Map<String, String> bookLibraryStringsBn = {
+  'title': 'বই লাইব্রেরি',
+  'subtitle': 'এনসিটিবি পাঠ্যক্রম — তোমার ডিজিটাল স্টাডি টেবিল',
+  'continue': 'পড়া চালিয়ে যাও',
+  'book1': 'সাধারণ গণিত',
+  'book1Sub': '১২/১৬ অধ্যায় · ৭৫%',
+  'book2': 'উচ্চতর গণিত',
+  'book2Sub': '৬/১৪ অধ্যায় · ৪০%',
+  'locked': 'বই এখনো দেওয়া হয়নি',
+  'lockedSub': 'এই বিষয়ের বই এখনো দেওয়া হয়নি, তাই লেসন খোলা যাবে না',
+  'class6Only': 'শুধু ক্লাস ৬ — অন্য ক্লাসের বই এলে এখানে আসবে',
+  'lockedNoLesson': 'লক করা বই থেকে লেসন খোলা যাবে না',
+  'continueNoBook': 'এখনো কোনো বই খোলা হয়নি — প্রথম বইটি খোলো',
+  'loading': 'বই লোড হচ্ছে…',
+  'noBooks': 'এই ক্লাসের কোনো বই এখনো ডাটাবেজে পাওয়া যায়নি',
+};
+const Map<String, String> bookLibraryStringsEn = {
+  'title': 'Book Library',
+  'subtitle': 'NCTB Curriculum — your digital study table',
+  'continue': 'Continue Reading',
+  'book1': 'General Mathematics',
+  'book1Sub': '12/16 chapters · 75%',
+  'book2': 'Higher Mathematics',
+  'book2Sub': '6/14 chapters · 40%',
+  'locked': 'Book not yet given',
+  'lockedSub': "This subject's book has not been given yet, so no lesson can be opened",
+  'class6Only': "Class 6 only — other classes' books will appear here when supplied",
+  'lockedNoLesson': 'No lesson can be opened from a locked book',
+  'continueNoBook': 'No book opened yet — open the first book',
+  'loading': 'Loading books…',
+  'noBooks': 'No books for this class were found in the database yet',
+};

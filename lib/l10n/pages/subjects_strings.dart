@@ -1,0 +1,31 @@
+// Subjects page strings - page-wise Bangla + English.
+const Map<String, String> subjectsStringsBn = {
+  'title': 'বিষয়সমূহ',
+  'subtitle': 'অষ্টম শ্রেণি · এনসিটিবি',
+  'overall': 'সামগ্রিক প্রস্তুতি',
+  'activeSubjects': 'টির মধ্যে ৬টি বিষয় সক্রিয়',
+  'allSubjects': 'সব বিষয়',
+  'chapters': 'টি অধ্যায়',
+  'progress': 'অগ্রগতি',
+  'locked': 'বই এখনো দেওয়া হয়নি',
+  'lockedHint': 'বই এলে খুলে যাবে',
+  'advice': 'আজকের পরামর্শ',
+  'adviceText': 'গণিত ৩য় অধ্যায়ের সূত্রগুলো একবার রিভিশন দাও, চমৎকার হবে!',
+  'booksSupplied': 'টি বিষয়ের বই দেওয়া আছে',
+  'lessonsOpened': 'টি লেসন খোলা হয়েছে',
+};
+const Map<String, String> subjectsStringsEn = {
+  'title': 'Subjects',
+  'subtitle': 'Class 8 · NCTB',
+  'overall': 'Overall preparation',
+  'activeSubjects': 'of 7 subjects active',
+  'allSubjects': 'All subjects',
+  'chapters': ' chapters',
+  'progress': 'Progress',
+  'locked': 'Book not supplied yet',
+  'lockedHint': 'It will unlock when the book arrives',
+  'advice': 'Today\'s advice',
+  'adviceText': 'Revise the Maths Chapter 3 formulas once — you will do great!',
+  'booksSupplied': 'subjects have a supplied book',
+  'lessonsOpened': 'lessons opened',
+};
