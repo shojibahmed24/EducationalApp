@@ -7,8 +7,9 @@
 // text: a question that merely starts with a part letter (e.g.
 // "খলিফা...") is NOT a part label, and parsing it produced
 // duplicate খ / missing ক chips (147 Bangla groups, 2026-11-04).
-// Ties on marks keep input order, with lettered rows first
-// (the old lettered-first rule, now only a tiebreaker).
+// Ties on marks: lettered rows first, then id order (natural, so
+// ...-9 before ...-10), then input order. 2/4/4 groups tie খ/গ.
+import '../../../core/models/creative_marks_parts.dart';
 import '../../../core/models/guide_bank_model.dart';
 
 /// Canonical part letters, in display order.
@@ -47,11 +48,11 @@ List<GuideBankQuestion> orderedCreativeParts(
     final p = group[i];
     indexed.add((p.marks ?? 999, creativePartIndex(p) ?? 999, i, p));
   }
-  indexed.sort((a, b) =>
-      a.$1 != b.$1
-          ? a.$1.compareTo(b.$1)
-          : a.$2 != b.$2
-              ? a.$2.compareTo(b.$2)
-              : a.$3.compareTo(b.$3));
+  indexed.sort((a, b) {
+    if (a.$1 != b.$1) return a.$1.compareTo(b.$1);
+    if (a.$2 != b.$2) return a.$2.compareTo(b.$2);
+    final c = compareIdsNatural(a.$4.id, b.$4.id);
+    return c != 0 ? c : a.$3.compareTo(b.$3);
+  });
   return indexed.map((e) => e.$4).toList();
 }
