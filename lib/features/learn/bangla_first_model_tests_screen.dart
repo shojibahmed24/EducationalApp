@@ -1,7 +1,6 @@
-// Section model tests by setId prefix. Titles come from the
-// slug -> lesson map, never invented; unparsable ids show
-// raw. MCQ sets start the timed exam path; creative sets
-// open their groups; no sets (the novel) shows empty.
+// Section model tests by setId prefix. Titles come from the slug -> lesson
+// map, never invented; unparsable ids show raw. MCQ sets start the timed exam
+// path; creative sets open their groups; no sets (the novel) shows empty.
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -17,6 +16,7 @@ import '../../l10n/pages/bangla_first_strings.dart';
 import '../practice/practice_store.dart';
 import 'bangla_first_retry_state.dart';
 import 'widgets/digits.dart';
+import 'package:yes_sir_ai/theme/themed_scaffold.dart';
 
 class _Loaded {
   const _Loaded({required this.sets, required this.isPremium});
@@ -147,7 +147,7 @@ class _BanglaFirstModelTestsScreenState
       builder: (context, locale, _) {
         final bn = locale.languageCode == 'bn';
         final s = bn ? banglaFirstStringsBn : banglaFirstStringsEn;
-        return Scaffold(
+        return ThemedScaffold(
           appBar: AppBar(
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),

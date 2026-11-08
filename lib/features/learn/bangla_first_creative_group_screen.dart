@@ -20,6 +20,7 @@ import 'bangla_first_creative_group_body.dart';
 import 'guide_answer_screen_body.dart';
 import 'widgets/guide_creative_part_loader.dart';
 import 'widgets/guide_creative_parts.dart';
+import 'package:yes_sir_ai/theme/themed_scaffold.dart';
 
 class BanglaFirstCreativeGroupScreen extends StatefulWidget {
   const BanglaFirstCreativeGroupScreen({
@@ -148,7 +149,7 @@ class _BanglaFirstCreativeGroupScreenState
         final ls = bn ? lessonStringsBn : lessonStringsEn;
         final bs = bn ? banglaFirstStringsBn : banglaFirstStringsEn;
         final onSurface = Theme.of(context).colorScheme.onSurface;
-        return Scaffold(
+        return ThemedScaffold(
           appBar: AppBar(
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),

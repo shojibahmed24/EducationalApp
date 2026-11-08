@@ -13,6 +13,7 @@ import '../../l10n/pages/bangla_first_strings.dart';
 import 'bangla_creative_grouping.dart';
 import 'bangla_first_retry_state.dart';
 import 'widgets/guide_creative_parts.dart';
+import 'package:yes_sir_ai/theme/themed_scaffold.dart';
 
 class BanglaFirstCreativeScreen extends StatefulWidget {
   const BanglaFirstCreativeScreen({
@@ -83,7 +84,7 @@ class _BanglaFirstCreativeScreenState
       builder: (context, locale, _) {
         final bn = locale.languageCode == 'bn';
         final s = bn ? banglaFirstStringsBn : banglaFirstStringsEn;
-        return Scaffold(
+        return ThemedScaffold(calm: true,
           appBar: AppBar(
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),

@@ -23,6 +23,7 @@ import 'bangla_second_potro.dart';
 import 'bangla_second_row_tile.dart';
 import 'bangla_second_types.dart';
 import 'widgets/digits.dart';
+import 'package:yes_sir_ai/theme/themed_scaffold.dart';
 
 const _kindTypes = <String, BanglaSecondType>{
   'onucched': BanglaSecondType.onucched,
@@ -100,7 +101,7 @@ class _BanglaSecondNirmitiScreenState
         final type = _kindTypes[widget.kind];
         final title =
             type == null ? s['title']! : banglaSecondTypeLabel(type, s);
-        return Scaffold(
+        return ThemedScaffold(calm: true,
           appBar: AppBar(
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),

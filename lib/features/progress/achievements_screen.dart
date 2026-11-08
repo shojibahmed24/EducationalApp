@@ -7,6 +7,7 @@ import 'package:yes_sir_ai/core/services/progress_service.dart';
 import 'package:yes_sir_ai/features/practice/widgets/practice_widgets.dart';
 import 'package:yes_sir_ai/l10n/language_provider.dart';
 import 'package:yes_sir_ai/l10n/pages/achievements_strings.dart';
+import 'package:yes_sir_ai/theme/themed_scaffold.dart';
 
 class _Badge {
   final String titleKey, subKey, progress;
@@ -27,7 +28,7 @@ class _AchievementsScreenState extends State<AchievementsScreen> {
   Widget build(BuildContext context) {
     return ValueListenableBuilder<Locale>(valueListenable: languageNotifier, builder: (context, locale, _) {
       final s = locale.languageCode == 'bn' ? achievementsStringsBn : achievementsStringsEn;
-      return Scaffold(
+      return ThemedScaffold(
         appBar: AppBar(
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),

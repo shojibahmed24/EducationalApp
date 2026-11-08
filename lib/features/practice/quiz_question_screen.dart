@@ -1,8 +1,7 @@
-// Route: /quiz. Tap option -> Submit checks it -> Next/Prev
-// navigate, Finish saves and goes to results. Elapsed time counts
-// up, stops on finish. 'স্যারের সহজ ব্যাখ্যা' comes from
-// explanation_service: book-grounded Edge AI, a labelled DEMO
-// fallback with no server path, never a substituted guess.
+// Route: /quiz. Tap option -> Submit checks it -> Next/Prev navigate, Finish
+// saves and goes to results. Elapsed time counts up, stops on finish. 'স্যারের
+// সহজ ব্যাখ্যা' comes from explanation_service: book-grounded Edge AI, a
+// labelled DEMO fallback with no server path, never a substituted guess.
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -15,6 +14,7 @@ import 'package:yes_sir_ai/features/practice/practice_store.dart';
 import 'package:yes_sir_ai/features/practice/quiz_explanation_body.dart';
 import 'package:yes_sir_ai/features/practice/widgets/practice_widgets.dart';
 import 'package:yes_sir_ai/features/practice/widgets/quiz_footer_actions.dart';
+import 'package:yes_sir_ai/features/practice/widgets/quiz_question_header.dart';
 import 'package:yes_sir_ai/features/practice/widgets/quiz_source_header.dart';
 import 'package:yes_sir_ai/l10n/language_provider.dart';
 import 'package:yes_sir_ai/l10n/pages/quiz_question_strings.dart';
@@ -31,11 +31,11 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen>
   late List<QuizItem> _items;
   final Map<int, int> _answers = {};
   final Set<int> _checked = {};
-  int _index = 0, _elapsed = 0;
+  int _index = 0;
+  final ValueNotifier<int> _elapsed = ValueNotifier<int>(0);
   Timer? _timer;
   // Phase 17 (L3): count-up pauses in background (old: kept counting).
-  bool _inBackground = false;
-  bool _finishing = false;
+  bool _inBackground = false, _finishing = false;
   // Explanation state per question index (live / DEMO / missing),
   // cached across Prev/Next like the answers.
   final Map<int, String> _explanations = {};
@@ -61,7 +61,7 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen>
     _items = PracticeSession.quizItems;
     PracticeSession.quizItems = _items;
     _timer = Timer.periodic(const Duration(seconds: 1), (_) {
-      if (mounted && !_inBackground) setState(() => _elapsed++);
+      if (mounted && !_inBackground) _elapsed.value++;
     });
   }
 
@@ -70,11 +70,10 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen>
       _inBackground = state != AppLifecycleState.resumed;
 
   @override
-  void dispose() { WidgetsBinding.instance.removeObserver(this); _timer?.cancel(); super.dispose(); }
+  void dispose() { WidgetsBinding.instance.removeObserver(this); _timer?.cancel(); _elapsed.dispose(); super.dispose(); }
   QuizItem get _q => _items[_index];
   bool get _isChecked => _checked.contains(_index);
   bool get _isLast => _index == _items.length - 1;
-  String get _clock => '${(_elapsed ~/ 60).toString().padLeft(2, '0')}:${(_elapsed % 60).toString().padLeft(2, '0')}';
 
   Future<void> _finish() async {
     if (_finishing) return;
@@ -86,7 +85,7 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen>
     }
     final attempt = Attempt(kind: 'quiz', testId: 'quiz-${PracticeSession.selectedSubject}',
         subject: PracticeSession.selectedSubject, chapter: PracticeSession.selectedSubject,
-        correct: correct, total: _items.length, seconds: _elapsed,
+        correct: correct, total: _items.length, seconds: _elapsed.value,
         date: PracticeSession.today(),
         answers: {for (final e in _answers.entries) _items[e.key].id: e.value},
         // Phase 2: persist the actual wrong items (guide items
@@ -174,7 +173,7 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen>
       _explanationModel.clear();
       _loadingExplanation.clear();
       _index = 0;
-      _elapsed = 0;
+      _elapsed.value = 0;
     });
   }
 
@@ -202,10 +201,12 @@ class _QuizQuestionScreenState extends State<QuizQuestionScreen>
             onBankSet: _switchToBank,
           ),
           const SizedBox(height: 8),
-          Row(children: [Text("${s['qLabel']!} ${_index + 1}/${_items.length}", style: Theme.of(context).textTheme.headlineMedium), const Spacer(), Chip(label: Text(_clock))]),
-          const SizedBox(height: 8),
-          Text(practiceService.chapterOf(_q.id, bangla), style: Theme.of(context).textTheme.bodySmall),
-          const SizedBox(height: 12),
+          QuizQuestionHeader(
+            label: "${s['qLabel']!} ${_index + 1}/${_items.length}",
+            progress: (_index + 1) / _items.length,
+            elapsed: _elapsed,
+            chapter: practiceService.chapterOf(_q.id, bangla),
+          ),
           Card(child: Padding(padding: const EdgeInsets.all(16), child: Text(bangla ? _q.questionBn : _q.questionEn, style: Theme.of(context).textTheme.bodyLarge))),
           const SizedBox(height: 12),
           for (int i = 0; i < _q.options.length; i++) Padding(

@@ -1,18 +1,16 @@
-// Route: /books/viewer — Book Reader.
-// Prev/Next/Jump REALLY change the page and the label, in both
-// languages (Bangla digits for bn, Latin digits for en — the old
-// replaceAll hack is gone). There is NO fixed page total: the books
-// table carries no page count, so the old "240 pages for every book"
-// claim is gone — pages go up from 1 without a fake ceiling, and
-// Jump only requires 1 or more. View Explanation goes to /lesson
-// with grounding for that page in DEMO (indexed questions only);
-// when Supabase is configured it goes straight to /lesson/no-match
-// and says so plainly, because a page cannot be mapped to a
-// verified question from the client (book_questions is server-only
-// by design) — never an invented question. Bookmark toggles and
-// persists. No real PDF rendering yet: the placeholder says exactly
-// that (source_link is NULL until PDFs are hosted in Storage).
-// NOTE: no bKash here — deliberately absent, Play Billing only.
+// Route: /books/viewer — Book Reader. Prev/Next/Jump REALLY change the page and
+// the label, in both languages (Bangla digits for bn, Latin digits for en — the
+// old replaceAll hack is gone). There is NO fixed page total: the books table
+// carries no page count, so the old "240 pages for every book" claim is gone —
+// pages go up from 1 without a fake ceiling, and Jump only requires 1 or more.
+// View Explanation goes to /lesson with grounding for that page in DEMO (indexed
+// questions only); when Supabase is configured it goes straight to
+// /lesson/no-match and says so plainly, because a page cannot be mapped to a
+// verified question from the client (book_questions is server-only by design) —
+// never an invented question. Bookmark toggles and persists. No real PDF rendering
+// yet: the placeholder says exactly that (source_link is NULL until PDFs are
+// hosted in Storage). NOTE: no bKash here — deliberately absent, Play Billing
+// only.
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:yes_sir_ai/core/services/learn_service.dart';
@@ -25,6 +23,7 @@ import 'package:yes_sir_ai/features/learn/widgets/digits.dart';
 import 'package:yes_sir_ai/features/learn/widgets/mock_data.dart';
 import 'package:yes_sir_ai/l10n/language_provider.dart';
 import 'package:yes_sir_ai/l10n/pages/book_page_viewer_strings.dart';
+import 'package:yes_sir_ai/theme/themed_scaffold.dart';
 
 class BookPageViewerScreen extends StatefulWidget {
   const BookPageViewerScreen({super.key});
@@ -135,7 +134,7 @@ class _BookPageViewerScreenState extends State<BookPageViewerScreen> {
         final pageLabel = bn
             ? 'পৃষ্ঠা ${numStr(_page, true)}'
             : 'Page $_page';
-        return Scaffold(
+        return ThemedScaffold(calm: true,
           appBar: AppBar(
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),

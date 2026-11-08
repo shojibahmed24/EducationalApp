@@ -1,12 +1,11 @@
-// Route: /guide-model-tests — SERVER-FIRST (Phase 2, plan §2
-// step 4): set metadata from the server (sets action, counts
-// only); the cache is FALLBACK ONLY for an unreachable server
-// (the old cache-only screen could never show a set, since
-// nothing ever wrote the cache). Rows load on demand at Start
-// (list action, setId filter) and are then cached; keys resolve
-// via Mode G, so unkeyed rows are excluded and labelled, never
-// scored or guessed. Free while freeGuideLimit < 0; otherwise
-// non-premium starts go to the paywall. Minutes default 15.
+// Route: /guide-model-tests — SERVER-FIRST (Phase 2, plan §2 step 4):
+// set metadata from the server (sets action, counts only); the cache is
+// FALLBACK ONLY for an unreachable server (the old cache-only screen
+// could never show a set, since nothing ever wrote the cache). Rows
+// load on demand at Start (list action, setId filter) and are then
+// cached; keys resolve via Mode G, so unkeyed rows are excluded and
+// labelled, never scored or guessed. Free while freeGuideLimit < 0;
+// otherwise non-premium starts go to the paywall. Minutes default 15.
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -22,6 +21,7 @@ import '../learn/widgets/digits.dart';
 import '../learn/widgets/mock_data.dart';
 import 'practice_store.dart';
 import 'widgets/practice_widgets.dart';
+import 'package:yes_sir_ai/theme/themed_scaffold.dart';
 
 class _LoadedSets {
   final List<GuideModelSetInfo>? meta;
@@ -151,7 +151,7 @@ class _GuideModelTestListScreenState
         final bn = locale.languageCode == 'bn';
         final s = bn ? guideBankStringsBn : guideBankStringsEn;
         final subject = PracticeSession.selectedSubject;
-        return Scaffold(
+        return ThemedScaffold(
           appBar: AppBar(
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),

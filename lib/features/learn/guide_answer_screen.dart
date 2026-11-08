@@ -18,6 +18,7 @@ import 'guide_answer_holder.dart';
 import 'guide_answer_screen_body.dart';
 import 'widgets/guide_message_state.dart';
 import 'widgets/guide_translate_switch.dart';
+import 'package:yes_sir_ai/theme/themed_scaffold.dart';
 
 class GuideAnswerScreen extends StatefulWidget {
   const GuideAnswerScreen({super.key});
@@ -179,7 +180,7 @@ class _GuideAnswerScreenState extends State<GuideAnswerScreen> {
         final s = bn ? guideBankStringsBn : guideBankStringsEn;
         final ls = bn ? lessonStringsBn : lessonStringsEn;
         final q = GuideAnswerHolder.question;
-        return Scaffold(
+        return ThemedScaffold(calm: true,
           appBar: AppBar(
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),

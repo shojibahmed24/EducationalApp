@@ -11,6 +11,7 @@ import 'package:yes_sir_ai/features/practice/practice_store.dart';
 import 'package:yes_sir_ai/features/practice/widgets/practice_widgets.dart';
 import 'package:yes_sir_ai/l10n/language_provider.dart';
 import 'package:yes_sir_ai/l10n/pages/model_test_list_strings.dart';
+import 'package:yes_sir_ai/theme/themed_scaffold.dart';
 
 class ModelTestListScreen extends StatelessWidget {
   const ModelTestListScreen({super.key});
@@ -47,7 +48,7 @@ class ModelTestListScreen extends StatelessWidget {
     return ValueListenableBuilder<Locale>(valueListenable: languageNotifier, builder: (context, locale, _) {
       final s = locale.languageCode == 'bn' ? modelTestListStringsBn : modelTestListStringsEn;
       final tests = modelTestService.modelTests();
-      return Scaffold(
+      return ThemedScaffold(
         appBar: AppBar(
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),

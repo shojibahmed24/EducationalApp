@@ -17,6 +17,7 @@ import '../../l10n/pages/bangla_first_strings.dart';
 import 'bangla_first_retry_state.dart';
 import 'bangla_mcq_grouping.dart';
 import 'search_flow_answer_nav.dart';
+import 'package:yes_sir_ai/theme/themed_scaffold.dart';
 
 const _optionLetters = ['ক', 'খ', 'গ', 'ঘ'];
 
@@ -84,7 +85,7 @@ class _BanglaFirstMcqScreenState extends State<BanglaFirstMcqScreen> {
       builder: (context, locale, _) {
         final bn = locale.languageCode == 'bn';
         final s = bn ? banglaFirstStringsBn : banglaFirstStringsEn;
-        return Scaffold(
+        return ThemedScaffold(
           appBar: AppBar(
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),

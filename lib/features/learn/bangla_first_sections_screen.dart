@@ -11,6 +11,7 @@ import '../../core/data/bangla_first_lessons.dart';
 import '../../core/services/bangla_first_fetch.dart';
 import '../../l10n/language_provider.dart';
 import '../../l10n/pages/bangla_first_strings.dart';
+import 'package:yes_sir_ai/theme/themed_scaffold.dart';
 
 class BanglaFirstSectionsScreen extends StatefulWidget {
   const BanglaFirstSectionsScreen({super.key});
@@ -44,7 +45,7 @@ class _BanglaFirstSectionsScreenState
         final bn = locale.languageCode == 'bn';
         final s = bn ? banglaFirstStringsBn : banglaFirstStringsEn;
         final showOther = _unmapped != null && _unmapped!.isNotEmpty;
-        return Scaffold(
+        return ThemedScaffold(
           appBar: AppBar(
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),

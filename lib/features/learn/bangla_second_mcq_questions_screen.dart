@@ -15,6 +15,7 @@ import 'bangla_first_retry_state.dart';
 import 'bangla_second_row_tile.dart';
 import 'bangla_second_types.dart';
 import 'search_flow_answer_nav.dart';
+import 'package:yes_sir_ai/theme/themed_scaffold.dart';
 
 class _QuestionsLoaded {
   const _QuestionsLoaded({required this.rows, required this.isPremium});
@@ -90,7 +91,7 @@ class _BanglaSecondMcqQuestionsScreenState
       builder: (context, locale, _) {
         final bn = locale.languageCode == 'bn';
         final s = bn ? banglaSecondStringsBn : banglaSecondStringsEn;
-        return Scaffold(
+        return ThemedScaffold(
           appBar: AppBar(
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),

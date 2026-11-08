@@ -8,6 +8,7 @@ import 'package:yes_sir_ai/features/practice/practice_store.dart';
 import 'package:yes_sir_ai/features/progress/widgets/progress_widgets.dart';
 import 'package:yes_sir_ai/l10n/language_provider.dart';
 import 'package:yes_sir_ai/l10n/pages/progress_strings.dart';
+import 'package:yes_sir_ai/theme/themed_scaffold.dart';
 
 class ProgressScreen extends StatelessWidget {
   const ProgressScreen({super.key});
@@ -41,7 +42,7 @@ class ProgressScreen extends StatelessWidget {
     return ValueListenableBuilder<Locale>(valueListenable: languageNotifier, builder: (context, locale, _) {
       final s = locale.languageCode == 'bn' ? progressStringsBn : progressStringsEn;
       final bangla = locale.languageCode == 'bn';
-      return Scaffold(
+      return ThemedScaffold(
         appBar: AppBar(
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),

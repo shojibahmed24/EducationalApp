@@ -1,12 +1,11 @@
-// Route: /search — textbook search, reworked (second step).
-// Primary action is "অধ্যায়ের সব প্রশ্ন দেখুন" (chapter list).
-// "সমাধান দেখো" is ONLY a shortcut: exact resolve -> /lesson,
-// else chapter list with a page banner when the chapter exists,
-// else /lesson/no-match (see decideSearchShortcut). No DEMO
-// quick-finds. Class = saved profile (loadSchoolClass ?? 6) in a
-// visible 6/7 selector; page/problem optional, default 1/1.
-// Textbook list = NCTB questions only; guide questions are in
-// Guide Bank (linked below).
+// Route: /search — textbook search, reworked (second step). Primary
+// action is "অধ্যায়ের সব প্রশ্ন দেখুন" (chapter list). "সমাধান
+// দেখো" is ONLY a shortcut: exact resolve -> /lesson, else chapter
+// list with a page banner when the chapter exists, else
+// /lesson/no-match (see decideSearchShortcut). No DEMO quick-finds.
+// Class = saved profile (loadSchoolClass ?? 6) in a visible 6/7
+// selector; page/problem optional, default 1/1. Textbook list = NCTB
+// questions only; guide questions are in Guide Bank (linked below).
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../core/services/books_service.dart';
@@ -21,6 +20,7 @@ import 'lesson_selection.dart';
 import 'widgets/search_guide_section.dart';
 import 'widgets/search_recents.dart';
 import 'widgets/search_stepper.dart';
+import 'package:yes_sir_ai/theme/themed_scaffold.dart';
 
 // Phase 16 (M1): [initialQuery] is the text typed on Home (?q=).
 // The stepper cannot resolve free text, so it is shown honestly
@@ -135,7 +135,7 @@ class _SearchScreenState extends State<SearchScreen> {
         final s = bn ? searchStringsBn : searchStringsEn;
         final nav = bn ? homeStringsBn : homeStringsEn;
         final classItems = {6, 7, _schoolClass}.toList()..sort();
-        return Scaffold(
+        return ThemedScaffold(
           appBar: AppBar(
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),

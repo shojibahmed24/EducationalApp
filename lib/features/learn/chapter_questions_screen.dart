@@ -21,6 +21,7 @@ import 'widgets/digits.dart';
 import 'widgets/guide_list_loading_shimmer.dart';
 import 'widgets/mock_data.dart';
 import 'widgets/textbook_filter.dart';
+import 'package:yes_sir_ai/theme/themed_scaffold.dart';
 
 class ChapterQuestionsScreen extends StatefulWidget {
   const ChapterQuestionsScreen({
@@ -120,7 +121,7 @@ class _ChapterQuestionsScreenState extends State<ChapterQuestionsScreen> {
         final title = _chapterTitle.isNotEmpty
             ? _chapterTitle
             : '${bn ? 'অধ্যায়' : 'Chapter'} ${numStr(widget.chapterNumber, bn)}';
-        return Scaffold(
+        return ThemedScaffold(
           appBar: AppBar(
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),

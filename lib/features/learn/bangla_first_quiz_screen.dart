@@ -16,6 +16,7 @@ import '../../l10n/pages/bangla_first_strings.dart';
 import 'bangla_first_quiz_card.dart';
 import 'bangla_first_retry_state.dart';
 import 'widgets/guide_creative_part_loader.dart';
+import 'package:yes_sir_ai/theme/themed_scaffold.dart';
 
 /// Mode G verbatim only (no AI explanation section on quiz
 /// cards): a printable answer becomes text, anything else null.
@@ -66,7 +67,7 @@ class _BanglaFirstQuizScreenState extends State<BanglaFirstQuizScreen> {
       builder: (context, locale, _) {
         final bn = locale.languageCode == 'bn';
         final s = bn ? banglaFirstStringsBn : banglaFirstStringsEn;
-        return Scaffold(
+        return ThemedScaffold(
           appBar: AppBar(
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),

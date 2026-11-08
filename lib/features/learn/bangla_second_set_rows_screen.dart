@@ -13,6 +13,7 @@ import '../../l10n/pages/bangla_second_strings.dart';
 import 'bangla_first_retry_state.dart';
 import 'bangla_second_row_tile.dart';
 import 'search_flow_answer_nav.dart';
+import 'package:yes_sir_ai/theme/themed_scaffold.dart';
 
 class _SetRowsLoaded {
   const _SetRowsLoaded({required this.rows, required this.isPremium});
@@ -86,7 +87,7 @@ class _BanglaSecondSetRowsScreenState
         final title = widget.group == 'board'
             ? widget.setId
             : '${s['modelTestsTitle']!} ${widget.setId}';
-        return Scaffold(
+        return ThemedScaffold(
           appBar: AppBar(
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),

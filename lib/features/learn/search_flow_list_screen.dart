@@ -27,6 +27,7 @@ import 'search_flow_types.dart';
 import 'widgets/search_flow_book_list.dart';
 import 'widgets/search_flow_guide_list.dart';
 import 'widgets/search_flow_message.dart';
+import 'package:yes_sir_ai/theme/themed_scaffold.dart';
 
 class SearchFlowListScreen extends StatefulWidget {
   const SearchFlowListScreen({
@@ -190,7 +191,7 @@ class _SearchFlowListScreenState extends State<SearchFlowListScreen> {
         final back = '/search-flow?subject=${widget.subjectId}';
         // Answer openings live in answer_nav; returnTo carries all filters.
         final returnTo = searchFlowListUrl(subjectId: widget.subjectId, schoolClass: widget.schoolClass, source: widget.source, chapterNumber: widget.chapterNumber, typeName: widget.type.name, lesson: widget.lesson, questionNumber: widget.questionNumber, section: widget.section, setId: widget.setId, chapterless: widget.chapterless, board: widget.board);
-        return Scaffold(
+        return ThemedScaffold(
           appBar: AppBar(
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),
@@ -246,5 +247,4 @@ class _SearchFlowListScreenState extends State<SearchFlowListScreen> {
       },
     );
   }
-
 }

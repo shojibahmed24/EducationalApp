@@ -16,6 +16,7 @@ import 'package:yes_sir_ai/features/practice/practice_store.dart';
 import 'package:yes_sir_ai/features/practice/widgets/practice_widgets.dart';
 import 'package:yes_sir_ai/l10n/language_provider.dart';
 import 'package:yes_sir_ai/l10n/pages/model_test_results_strings.dart';
+import 'package:yes_sir_ai/theme/themed_scaffold.dart';
 
 class ModelTestResultsScreen extends StatelessWidget {
   const ModelTestResultsScreen({super.key});
@@ -96,7 +97,7 @@ class ModelTestResultsScreen extends StatelessWidget {
       // Cleared at once: revisiting results later must not re-show it.
       final timeUp = PracticeSession.timeUpAutoSubmit;
       PracticeSession.timeUpAutoSubmit = false;
-      return Scaffold(
+      return ThemedScaffold(
         appBar: AppBar(
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),

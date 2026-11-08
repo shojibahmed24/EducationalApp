@@ -17,6 +17,7 @@ import 'bangla_first_retry_state.dart';
 import 'bangla_second_chapter_titles.dart';
 import 'bangla_second_types.dart';
 import 'widgets/digits.dart';
+import 'package:yes_sir_ai/theme/themed_scaffold.dart';
 
 const _chips = ['all', 'nctb', 'exam-common', 'exam'];
 
@@ -72,7 +73,7 @@ class _BanglaSecondMcqScreenState extends State<BanglaSecondMcqScreen> {
       builder: (context, locale, _) {
         final bn = locale.languageCode == 'bn';
         final s = bn ? banglaSecondStringsBn : banglaSecondStringsEn;
-        return Scaffold(
+        return ThemedScaffold(
           appBar: AppBar(
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),

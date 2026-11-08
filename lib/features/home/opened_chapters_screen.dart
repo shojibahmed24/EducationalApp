@@ -11,6 +11,7 @@ import '../../l10n/pages/home_strings.dart';
 import '../learn/learn_store.dart';
 import '../learn/widgets/digits.dart';
 import '../learn/widgets/mock_data.dart';
+import 'package:yes_sir_ai/theme/themed_scaffold.dart';
 
 class OpenedChapterGroup {
   const OpenedChapterGroup({required this.subject, required this.chapters});
@@ -66,7 +67,7 @@ class _OpenedChaptersScreenState extends State<OpenedChaptersScreen> {
       builder: (context, locale, _) {
         final bn = locale.languageCode == 'bn';
         final s = bn ? homeStringsBn : homeStringsEn;
-        return Scaffold(
+        return ThemedScaffold(
           appBar: AppBar(
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),

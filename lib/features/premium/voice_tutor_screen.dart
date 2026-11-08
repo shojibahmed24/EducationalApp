@@ -18,6 +18,7 @@ import '../../core/services/billing_service.dart';
 import '../../l10n/language_provider.dart';
 import '../../l10n/pages/premium_strings.dart';
 import '../../theme/app_theme.dart';
+import 'package:yes_sir_ai/theme/themed_scaffold.dart';
 
 class VoiceTutorScreen extends StatefulWidget {
   const VoiceTutorScreen({super.key});
@@ -134,12 +135,12 @@ class _VoiceTutorScreenState extends State<VoiceTutorScreen> {
   Widget build(BuildContext context) {
     final s = isBangla ? premiumStringsBn : premiumStringsEn;
     if (_loading) {
-      return Scaffold(
+      return ThemedScaffold(
           appBar: AppBar(title: Text(s['voiceTitle']!)),
           body: const Center(child: CircularProgressIndicator()));
     }
     if (!_isPremium) {
-      return Scaffold(
+      return ThemedScaffold(
         appBar: AppBar(title: Text(s['voiceTitle']!)),
         body: Padding(
           padding: const EdgeInsets.all(24),
@@ -164,7 +165,7 @@ class _VoiceTutorScreenState extends State<VoiceTutorScreen> {
       );
     }
     final exhausted = !_inCall && _remaining <= 0;
-    return Scaffold(
+    return ThemedScaffold(
       appBar: AppBar(title: Text(s['voiceTitle']!)),
       body: Padding(
         padding: const EdgeInsets.all(24),

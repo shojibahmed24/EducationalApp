@@ -18,6 +18,7 @@ import 'package:yes_sir_ai/features/practice/widgets/practice_widgets.dart';
 import 'package:yes_sir_ai/l10n/language_provider.dart';
 import 'package:yes_sir_ai/l10n/pages/practice_strings.dart';
 import 'package:yes_sir_ai/l10n/pages/practice_tab_strings.dart';
+import 'package:yes_sir_ai/theme/themed_scaffold.dart';
 
 class PracticeTabScreen extends StatefulWidget {
   const PracticeTabScreen({super.key});
@@ -113,7 +114,7 @@ class _PracticeTabScreenState extends State<PracticeTabScreen> {
     return ValueListenableBuilder<Locale>(valueListenable: languageNotifier, builder: (context, locale, _) {
       final s = locale.languageCode == 'bn' ? practiceTabStringsBn : practiceTabStringsEn;
       final bangla = locale.languageCode == 'bn';
-      return DefaultTabController(length: 3, child: Scaffold(
+      return DefaultTabController(length: 3, child: ThemedScaffold(
         appBar: AppBar(
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),

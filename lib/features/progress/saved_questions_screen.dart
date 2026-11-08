@@ -12,6 +12,7 @@ import 'package:yes_sir_ai/features/practice/practice_store.dart';
 import 'package:yes_sir_ai/features/practice/widgets/practice_widgets.dart';
 import 'package:yes_sir_ai/l10n/language_provider.dart';
 import 'package:yes_sir_ai/l10n/pages/saved_questions_strings.dart';
+import 'package:yes_sir_ai/theme/themed_scaffold.dart';
 
 class SavedQuestionsScreen extends StatefulWidget {
   const SavedQuestionsScreen({super.key});
@@ -40,17 +41,17 @@ class _SavedQuestionsScreenState extends State<SavedQuestionsScreen> {
       final s = locale.languageCode == 'bn' ? savedQuestionsStringsBn : savedQuestionsStringsEn;
       final bangla = locale.languageCode == 'bn';
       if (_loading) {
-        return Scaffold(appBar: AppBar(leading: IconButton(icon: const Icon(Icons.arrow_back), onPressed: () => context.go('/profile')), title: Text(s['title']!)), body: const Center(child: CircularProgressIndicator()));
+        return ThemedScaffold(appBar: AppBar(leading: IconButton(icon: const Icon(Icons.arrow_back), onPressed: () => context.go('/profile')), title: Text(s['title']!)), body: const Center(child: CircularProgressIndicator()));
       }
       if (_ids.isEmpty) {
-        return Scaffold(appBar: AppBar(leading: IconButton(icon: const Icon(Icons.arrow_back), onPressed: () => context.go('/profile')), title: Text(s['title']!)), body: ListView(padding: const EdgeInsets.all(16), children: [
+        return ThemedScaffold(appBar: AppBar(leading: IconButton(icon: const Icon(Icons.arrow_back), onPressed: () => context.go('/profile')), title: Text(s['title']!)), body: ListView(padding: const EdgeInsets.all(16), children: [
           Text(s['empty']!, style: Theme.of(context).textTheme.headlineMedium),
           const SizedBox(height: 8), Text(s['emptySub']!),
           const SizedBox(height: 16),
           ElevatedButton(onPressed: () => context.go('/practice'), child: Text(s['startPractice']!)),
         ]));
       }
-      return Scaffold(
+      return ThemedScaffold(
         appBar: AppBar(
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),

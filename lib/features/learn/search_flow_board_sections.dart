@@ -20,6 +20,7 @@ import '../../l10n/pages/search_flow_strings.dart';
 import 'search_flow_types.dart';
 import 'widgets/digits.dart';
 import 'widgets/search_flow_message.dart';
+import 'package:yes_sir_ai/theme/themed_scaffold.dart';
 
 class SearchFlowBoardSectionsScreen extends StatelessWidget {
   const SearchFlowBoardSectionsScreen({
@@ -42,7 +43,7 @@ class SearchFlowBoardSectionsScreen extends StatelessWidget {
         final bn = locale.languageCode == 'bn';
         final s = bn ? searchFlowStringsBn : searchFlowStringsEn;
         final back = '/search-flow?subject=$subjectId';
-        return Scaffold(
+        return ThemedScaffold(
           appBar: AppBar(
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),

@@ -12,6 +12,7 @@ import 'learn_store.dart';
 import 'lesson_selection.dart';
 import 'widgets/digits.dart';
 import 'widgets/mock_data.dart';
+import 'package:yes_sir_ai/theme/themed_scaffold.dart';
 
 class NoMatchScreen extends StatefulWidget {
   const NoMatchScreen({super.key});
@@ -63,7 +64,7 @@ class _NoMatchScreenState extends State<NoMatchScreen> {
                 '${bn ? 'অধ্যায়' : 'Chapter'} ${numStr(sel.chapter, bn)} · '
                 '${bn ? 'পৃষ্ঠা' : 'Page'} ${numStr(sel.page, bn)} · '
                 '${bn ? 'প্রশ্ন' : 'Question'} ${numStr(sel.problem, bn)}';
-        return Scaffold(
+        return ThemedScaffold(
           appBar: AppBar(
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),

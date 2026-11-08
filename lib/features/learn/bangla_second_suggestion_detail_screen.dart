@@ -22,6 +22,7 @@ import 'bangla_second_row_tile.dart';
 import 'bangla_second_types.dart';
 import 'search_flow_answer_nav.dart';
 import 'widgets/digits.dart';
+import 'package:yes_sir_ai/theme/themed_scaffold.dart';
 
 class _DetailLoaded {
   const _DetailLoaded({
@@ -107,7 +108,7 @@ class _BanglaSecondSuggestionDetailScreenState
       builder: (context, locale, _) {
         final bn = locale.languageCode == 'bn';
         final s = bn ? banglaSecondStringsBn : banglaSecondStringsEn;
-        return Scaffold(
+        return ThemedScaffold(calm: true,
           appBar: AppBar(
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),

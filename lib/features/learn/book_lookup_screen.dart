@@ -21,6 +21,7 @@ import '../../l10n/pages/book_lookup_strings.dart';
 import 'widgets/book_lookup_detail.dart';
 import 'widgets/book_lookup_page_list.dart';
 import 'widgets/book_lookup_text_search.dart';
+import 'package:yes_sir_ai/theme/themed_scaffold.dart';
 
 class BookLookupScreen extends StatefulWidget {
   const BookLookupScreen({super.key});
@@ -120,7 +121,7 @@ class _BookLookupScreenState extends State<BookLookupScreen> {
           _catalogBn = bn;
           _catalog = _load(bn);
         }
-        return Scaffold(
+        return ThemedScaffold(
           appBar: AppBar(
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),

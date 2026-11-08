@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import '../../l10n/language_provider.dart';
 import '../../l10n/pages/help_about_strings.dart';
+import 'package:yes_sir_ai/theme/themed_scaffold.dart';
 
 class HelpFaqScreen extends StatelessWidget {
   const HelpFaqScreen({super.key});
@@ -21,7 +22,7 @@ class HelpFaqScreen extends StatelessWidget {
       (s['q3']!, s['a3']!),
       (s['q4']!, s['a4']!),
     ];
-    return Scaffold(
+    return ThemedScaffold(
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),

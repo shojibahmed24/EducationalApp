@@ -16,6 +16,7 @@ import '../../l10n/language_provider.dart';
 import '../../l10n/pages/parent_strings.dart';
 import '../../theme/app_theme.dart';
 import 'widgets/parent_stat_card.dart';
+import 'package:yes_sir_ai/theme/themed_scaffold.dart';
 
 class ParentDashboardScreen extends StatefulWidget {
   const ParentDashboardScreen({super.key});
@@ -75,7 +76,7 @@ class _ParentDashboardScreenState extends State<ParentDashboardScreen> {
   Widget build(BuildContext context) {
     final s = isBangla ? parentStringsBn : parentStringsEn;
     if (_loading) {
-      return Scaffold(
+      return ThemedScaffold(
           appBar: AppBar(
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),
@@ -89,7 +90,7 @@ class _ParentDashboardScreenState extends State<ParentDashboardScreen> {
     final heading = _name.isEmpty
         ? s['student']!
         : (_schoolClass.isEmpty ? _name : '$_name • $_schoolClass');
-    return Scaffold(
+    return ThemedScaffold(
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),

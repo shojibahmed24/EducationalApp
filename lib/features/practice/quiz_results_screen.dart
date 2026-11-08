@@ -9,6 +9,7 @@ import 'package:yes_sir_ai/features/practice/practice_store.dart';
 import 'package:yes_sir_ai/features/practice/widgets/practice_widgets.dart';
 import 'package:yes_sir_ai/l10n/language_provider.dart';
 import 'package:yes_sir_ai/l10n/pages/quiz_results_strings.dart';
+import 'package:yes_sir_ai/theme/themed_scaffold.dart';
 
 class QuizResultsScreen extends StatelessWidget {
   const QuizResultsScreen({super.key});
@@ -32,7 +33,7 @@ class QuizResultsScreen extends StatelessWidget {
     return ValueListenableBuilder<Locale>(valueListenable: languageNotifier, builder: (context, locale, _) {
       final s = locale.languageCode == 'bn' ? quizResultsStringsBn : quizResultsStringsEn;
       final bangla = locale.languageCode == 'bn';
-      return Scaffold(
+      return ThemedScaffold(
         appBar: AppBar(
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),

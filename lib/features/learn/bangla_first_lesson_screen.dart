@@ -8,6 +8,7 @@ import 'package:go_router/go_router.dart';
 import '../../core/data/bangla_first_lessons.dart';
 import '../../l10n/language_provider.dart';
 import '../../l10n/pages/bangla_first_strings.dart';
+import 'package:yes_sir_ai/theme/themed_scaffold.dart';
 
 class BanglaFirstLessonScreen extends StatelessWidget {
   const BanglaFirstLessonScreen({
@@ -33,7 +34,7 @@ class BanglaFirstLessonScreen extends StatelessWidget {
         final bn = locale.languageCode == 'bn';
         final s = bn ? banglaFirstStringsBn : banglaFirstStringsEn;
         final lesson = banglaFirstLessonByTitle(lessonTitle);
-        return Scaffold(
+        return ThemedScaffold(calm: true,
           appBar: AppBar(
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),

@@ -8,6 +8,7 @@
 import 'package:flutter/material.dart';
 
 import 'app_theme.dart';
+import 'app_tokens.dart';
 
 class AppBackground extends StatelessWidget {
   const AppBackground({super.key, this.calm = false});
@@ -34,8 +35,8 @@ class AppBackground extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: dark
-                    ? const [Color(0xFF243447), Color(0xFF1E293B)]
-                    : const [Color(0xFFE8F0FE), AppTheme.paper],
+                    ? const [DarkPalette.backgroundTop, DarkPalette.background]
+                    : const [LightPalette.backgroundTop, AppTheme.paper],
               ),
             ),
           ),

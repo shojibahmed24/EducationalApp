@@ -17,6 +17,7 @@ import '../../l10n/pages/search_flow_strings.dart';
 import 'search_flow_answer_nav.dart';
 import 'search_flow_types.dart';
 import 'widgets/search_flow_guide_list.dart';
+import 'package:yes_sir_ai/theme/themed_scaffold.dart';
 
 class EnglishSearchFlowListScreen extends StatefulWidget {
   const EnglishSearchFlowListScreen({
@@ -155,7 +156,7 @@ class _EnglishSearchFlowListScreenState
             widget.section ??
             widget.lesson ??
             es['title']!;
-        return Scaffold(
+        return ThemedScaffold(
           appBar: AppBar(
             leading: IconButton(
                 icon: const Icon(Icons.arrow_back),

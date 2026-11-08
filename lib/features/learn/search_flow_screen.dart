@@ -1,15 +1,14 @@
-// New search screen (Step 3): home tile -> this screen. Order
-// (plan §1): শ্রেণি -> বিষয় -> সোর্স (পাঠ্যবই / গাইড) ->
-// ONE global picker (subject-wise items load below, same widget
-// for every subject) -> প্রশ্ন নম্বর ইনপুট (NO page field
-// anywhere) -> টাইপ (exactly 5). State + resolution live in
-// SearchFlowController; this file only renders and navigates.
-// The English guide tree navigates to the existing English list
-// and reader routes; Bangla 2nd types open the existing
-// dedicated picker routes. UI (plan §5): every input uses the
-// shared SearchFlowField component, grouped under two headings,
-// with actions pinned at the bottom and a hint when chapter/type
-// are still unpicked. No old screen/route is touched.
+// New search screen (Step 3): home tile -> this screen. Order (plan
+// §1): শ্রেণি -> বিষয় -> সোর্স (পাঠ্যবই / গাইড) -> ONE global
+// picker (subject-wise items load below, same widget for every
+// subject) -> প্রশ্ন নম্বর ইনপুট (NO page field anywhere) -> টাইপ
+// (exactly 5). State + resolution live in SearchFlowController; this
+// file only renders and navigates. The English guide tree navigates
+// to the existing English list and reader routes; Bangla 2nd types
+// open the existing dedicated picker routes. UI (plan §5): every
+// input uses the shared SearchFlowField component, grouped under two
+// headings, with actions pinned at the bottom and a hint when
+// chapter/type are still unpicked. No old screen/route is touched.
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
@@ -32,6 +31,7 @@ import 'widgets/search_flow_board_tile.dart';
 import 'widgets/search_flow_field.dart';
 import 'widgets/search_flow_field_states.dart';
 import 'widgets/search_flow_identity_fields.dart';
+import 'package:yes_sir_ai/theme/themed_scaffold.dart';
 
 class SearchFlowScreen extends StatefulWidget {
   const SearchFlowScreen({
@@ -131,7 +131,7 @@ class _SearchFlowScreenState extends State<SearchFlowScreen> {
         final canSubmit = (setMode || banglaFirst || banglaSecond || paper2Mode || _c.chapter != null) && !needType;
         final String? actionHint = setMode || banglaFirst || banglaSecond ? null : paper2Mode ? (_extras.paper2Section == null ? s['actionHintSection'] : null) : _c.chapter == null && needType ? s['actionHintBoth'] : _c.chapter == null ? s['actionHintChapter'] : needType ? s['actionHintType'] : null;
         const gap = SizedBox(height: 12);
-        return Scaffold(
+        return ThemedScaffold(
           appBar: AppBar(
             leading: IconButton(icon: const Icon(Icons.arrow_back), onPressed: () => context.go('/home')),
             title: Text(s['title']!),

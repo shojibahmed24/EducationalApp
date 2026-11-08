@@ -8,6 +8,7 @@ import 'package:go_router/go_router.dart';
 import '../../core/data/bangla_first_lessons.dart';
 import '../../l10n/language_provider.dart';
 import '../../l10n/pages/bangla_first_strings.dart';
+import 'package:yes_sir_ai/theme/themed_scaffold.dart';
 
 class BanglaFirstSectionScreen extends StatelessWidget {
   const BanglaFirstSectionScreen({
@@ -37,7 +38,7 @@ class BanglaFirstSectionScreen extends StatelessWidget {
         final authors = _isOther
             ? const <String, String>{}
             : {for (final l in known) l.title: l.author};
-        return Scaffold(
+        return ThemedScaffold(
           appBar: AppBar(
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),

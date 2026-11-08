@@ -16,6 +16,7 @@ import '../../l10n/pages/parent_strings.dart';
 import '../../theme/app_theme.dart';
 import 'parent_pin_store.dart';
 import 'parent_session.dart';
+import 'package:yes_sir_ai/theme/themed_scaffold.dart';
 
 class ParentPinScreen extends StatefulWidget {
   const ParentPinScreen({super.key});
@@ -149,13 +150,13 @@ class _ParentPinScreenState extends State<ParentPinScreen> {
   Widget build(BuildContext context) {
     final s = isBangla ? parentStringsBn : parentStringsEn;
     if (_hasPin == null) {
-      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+      return const ThemedScaffold(body: Center(child: CircularProgressIndicator()));
     }
     final sub = _settingUp
         ? (_confirming ? s['pinConfirmSub']! : s['pinSetupSub']!)
         : s['pinSub']!;
     final errorText = _locked ? _lockedText(s) : _error;
-    return Scaffold(
+    return ThemedScaffold(
       appBar: AppBar(
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),

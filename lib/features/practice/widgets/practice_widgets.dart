@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:yes_sir_ai/theme/app_theme.dart';
+import 'package:yes_sir_ai/theme/app_tokens.dart';
 
 /// Shared small cards for practice / quiz / model-test screens.
 /// Warm Paper Scholar: cream card, rounded 24, soft shadow.
@@ -108,7 +109,10 @@ class _OptionTileState extends State<OptionTile>
     final isWrongSelected =
         isChecked && widget.correct == false && widget.selected;
     Color? bg;
-    Color avatarColor = AppTheme.secondary;
+    // Unchecked options: soft blue chip with a dark-blue letter
+    // (was a solid purple circle on every option). Selected /
+    // correct / wrong keep solid colours with a white letter.
+    Color avatarColor = AppTheme.primary.withValues(alpha: 0.14);
     BorderSide? border;
     if (widget.correct == true) {
       bg = AppTheme.success.withValues(alpha: 0.15);
@@ -123,12 +127,18 @@ class _OptionTileState extends State<OptionTile>
       avatarColor = AppTheme.primary;
       border = const BorderSide(color: AppTheme.primary, width: 2);
     }
+    final scheme = Theme.of(context).colorScheme;
+    final solid = bg != null;
+    final letter = solid
+        ? Colors.white
+        : (Theme.of(context).brightness == Brightness.dark
+            ? scheme.primary
+            : AppTheme.primaryDark);
     final card = Card(
       color: bg,
-      shape: border == null
-          ? null
-          : RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(24), side: border),
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(Rad.md),
+          side: border ?? BorderSide(color: scheme.outlineVariant)),
       child: InkWell(
         onTap: widget.onTap,
         onTapDown: (_) {
@@ -138,11 +148,11 @@ class _OptionTileState extends State<OptionTile>
         },
         onTapUp: (_) => setState(() => _pressed = false),
         onTapCancel: () => setState(() => _pressed = false),
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(Rad.md),
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
           child: Row(children: [
-            CircleAvatar(radius: 16, backgroundColor: avatarColor, child: Text(widget.label, style: const TextStyle(color: Colors.white))),
+            CircleAvatar(radius: 16, backgroundColor: avatarColor, child: Text(widget.label, style: TextStyle(color: letter, fontWeight: FontWeight.w600))),
             const SizedBox(width: 12),
             Expanded(child: Text(widget.text, style: Theme.of(context).textTheme.bodyMedium)),
             if (isSelectedPre) const Icon(Icons.radio_button_checked, color: AppTheme.primary),

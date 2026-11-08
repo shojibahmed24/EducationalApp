@@ -11,6 +11,7 @@ import 'package:go_router/go_router.dart';
 import '../../l10n/language_provider.dart';
 import '../../l10n/pages/bangla_second_strings.dart';
 import 'bangla_second_types.dart';
+import 'package:yes_sir_ai/theme/themed_scaffold.dart';
 
 class BanglaSecondTypesScreen extends StatelessWidget {
   const BanglaSecondTypesScreen({super.key});
@@ -22,7 +23,7 @@ class BanglaSecondTypesScreen extends StatelessWidget {
       builder: (context, locale, _) {
         final bn = locale.languageCode == 'bn';
         final s = bn ? banglaSecondStringsBn : banglaSecondStringsEn;
-        return Scaffold(
+        return ThemedScaffold(
           appBar: AppBar(
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),

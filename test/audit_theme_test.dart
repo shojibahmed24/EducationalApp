@@ -12,6 +12,7 @@ import 'package:yes_sir_ai/features/learn/widgets/solution_blocks.dart';
 import 'package:yes_sir_ai/features/learn/widgets/solution_renderer.dart';
 import 'package:yes_sir_ai/features/learn/widgets/solution_source_chips.dart';
 import 'package:yes_sir_ai/theme/app_theme.dart';
+import 'package:yes_sir_ai/theme/app_tokens.dart';
 
 double _lum(Color c) {
   double ch(int v) {
@@ -223,7 +224,7 @@ void main() {
     final light = AppTheme.light();
     final dark = AppTheme.dark();
     expect(light.cardTheme.color, AppTheme.card);
-    expect(dark.cardTheme.color, const Color(0xFF334155));
+    expect(dark.cardTheme.color, DarkPalette.surface);
     expect(
       light.textButtonTheme.style?.foregroundColor?.resolve({}),
       AppTheme.primaryDark,

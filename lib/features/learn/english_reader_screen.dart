@@ -25,6 +25,7 @@ import 'widgets/english_reader_passage_box.dart';
 import 'widgets/english_reader_question_card.dart';
 import 'widgets/english_reader_question_nav.dart';
 import 'widgets/guide_message_state.dart';
+import 'package:yes_sir_ai/theme/themed_scaffold.dart';
 
 class EnglishReaderScreen extends StatefulWidget {
   const EnglishReaderScreen({
@@ -220,7 +221,7 @@ class _EnglishReaderScreenState extends State<EnglishReaderScreen> {
         final fs = bn ? searchFlowStringsBn : searchFlowStringsEn;
         final labels = _chipLabels(bn, fs);
         final parts = _showEnd ? _data!.parts : _currentParts();
-        return Scaffold(
+        return ThemedScaffold(calm: true,
           appBar: AppBar(
             leading: IconButton(
                 icon: const Icon(Icons.arrow_back),
