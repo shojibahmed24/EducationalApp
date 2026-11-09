@@ -14,6 +14,7 @@ import 'search_flow_bangla_papers.dart';
 import 'search_flow_browse_extras.dart';
 import 'search_flow_chapter_fetch.dart';
 import 'search_flow_controller.dart';
+import 'search_flow_types.dart';
 
 String? globalPickerSelectedId(
     SearchFlowController c, SearchFlowBrowseExtras extras) {
@@ -78,6 +79,30 @@ void applyGlobalPickerPick({
       break;
   }
   onChanged();
+}
+
+/// A branch node was opened. English sections load their lessons;
+/// a guide chapter with lessons loads each lesson's question counts
+/// (lazily, only now, only for this chapter).
+void onGlobalPickerBranch({
+  required GlobalPickerNode node,
+  required SearchFlowController c,
+  required SearchFlowBrowseExtras extras,
+  required GlobalPickerEnglishHost english,
+}) {
+  if (node.kind == GlobalPickerNodeKind.englishSection) {
+    english.controller?.selectSection(node.id.substring(3));
+  }
+  if (node.kind == GlobalPickerNodeKind.chapter && c.source == 'guide') {
+    final n = int.tryParse(node.id.split(':').last);
+    if (n == null) return;
+    extras.lessonCounts.load(
+      subject: c.effectiveSubjectId,
+      schoolClass: c.effectiveClass,
+      chapter: n,
+      lessons: lessonsForChapter(c.subjectId, c.schoolClass, n).keys,
+    );
+  }
 }
 
 class GlobalPickerEnglishHost {

@@ -14,6 +14,7 @@ import '../../core/services/app_config.dart';
 import '../../core/services/edge_post.dart';
 import '../../core/services/model_test_set_service.dart';
 import '../../core/services/picker_cache_service.dart';
+import 'search_flow_lesson_counts.dart';
 
 class SearchFlowBrowseExtras {
   SearchFlowBrowseExtras({required this.onChanged});
@@ -39,6 +40,9 @@ class SearchFlowBrowseExtras {
 
   /// Paper-II section pick (english-2nd only). Null = none.
   String? paper2Section;
+
+  /// Lazy per-lesson question counts (picker lesson rows).
+  late final lessonCounts = SearchFlowLessonCounts(onChanged: _notify);
 
   int _generation = 0;
 

@@ -14,6 +14,7 @@ import 'global_picker_model.dart';
 import 'search_flow_bangla_papers.dart';
 import 'search_flow_browse_extras.dart';
 import 'search_flow_controller.dart';
+import 'search_flow_lesson_counts.dart';
 import 'search_flow_types.dart';
 import 'set_display_labels.dart';
 import 'widgets/digits.dart';
@@ -129,6 +130,7 @@ GlobalPickerTree buildGlobalPickerTree({
           GlobalPickerNode(
             id: 'lesson:$n:all',
             title: s['lessonAll']!,
+            subtitle: lessonCountsLine(extras.lessonCounts.of(n, null), s, bn),
             kind: GlobalPickerNodeKind.lesson,
             pick: GlobalPickerPick.chapterLesson(n, null),
           ),
@@ -136,6 +138,8 @@ GlobalPickerTree buildGlobalPickerTree({
             GlobalPickerNode(
               id: 'lesson:$n:${e.key}',
               title: '${e.key} · ${e.value}',
+              subtitle:
+                  lessonCountsLine(extras.lessonCounts.of(n, e.key), s, bn),
               kind: GlobalPickerNodeKind.lesson,
               pick: GlobalPickerPick.chapterLesson(n, e.key),
             ),

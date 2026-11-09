@@ -13,7 +13,6 @@ import 'package:go_router/go_router.dart';
 import '../../l10n/language_provider.dart';
 import '../../l10n/pages/search_flow_strings.dart';
 import 'global_picker_english.dart';
-import 'global_picker_model.dart';
 import 'global_picker_tree.dart';
 import 'guide_answer_holder.dart';
 import 'lesson_selection.dart';
@@ -187,9 +186,7 @@ class _SearchFlowScreenState extends State<SearchFlowScreen> {
                           s: s,
                           selectedId: globalPickerSelectedId(_c, _extras),
                           onPick: (pick) => applyGlobalPickerPick(context: context, c: _c, extras: _extras, pick: pick, onChanged: () => setState(() {})),
-                          onBranch: (node) {
-                            if (node.kind == GlobalPickerNodeKind.englishSection) _englishHost.controller?.selectSection(node.id.substring(3));
-                          },
+                          onBranch: (node) => onGlobalPickerBranch(node: node, c: _c, extras: _extras, english: _englishHost),
                         ),
                       // Board tile (migration 018 flag, Board
                       // revision): chapter-like row, no chapter
