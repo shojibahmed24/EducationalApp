@@ -2,16 +2,14 @@
 // §1): শ্রেণি -> বিষয় -> সোর্স (পাঠ্যবই / গাইড) -> ONE global
 // picker (subject-wise items load below, same widget for every
 // subject) -> প্রশ্ন নম্বর ইনপুট (NO page field anywhere) -> টাইপ
-// (exactly 5). State + resolution live in SearchFlowController; this
-// file only renders and navigates. The English guide tree navigates
-// to the existing English list and reader routes; Bangla 2nd types
-// open the existing dedicated picker routes. UI (plan §5): every
-// input uses the shared SearchFlowField component, grouped under two
-// headings, with actions pinned at the bottom and a hint when
-// chapter/type are still unpicked. No old screen/route is touched.
+// (exactly 5; guide mode shows the exact count per type). State +
+// resolution live in SearchFlowController; this file only renders
+// and navigates. The English guide tree and Bangla 2nd types open
+// their existing routes. UI (plan §5): shared SearchFlowField
+// inputs, actions pinned at the bottom, hint while chapter/type
+// are unpicked. No old screen/route is touched.
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-
 import '../../l10n/language_provider.dart';
 import '../../l10n/pages/search_flow_strings.dart';
 import 'global_picker_english.dart';
@@ -29,6 +27,7 @@ import 'widgets/global_picker.dart';
 import 'widgets/search_flow_actions.dart';
 import 'widgets/search_flow_board_tile.dart';
 import 'widgets/search_flow_field.dart';
+import 'widgets/search_flow_type_field.dart';
 import 'widgets/search_flow_field_states.dart';
 import 'widgets/search_flow_identity_fields.dart';
 import 'package:yes_sir_ai/theme/themed_scaffold.dart';
@@ -217,10 +216,11 @@ class _SearchFlowScreenState extends State<SearchFlowScreen> {
                           !setMode &&
                           !paper2Mode) ...[
                         gap,
-                        SearchFlowDropdownField<SearchFlowType>(
-                          label: s['typeLabel']!, icon: Icons.category,
-                          value: _c.type,
-                          items: [for (final t in SearchFlowType.values) SearchFlowDropdownItem(value: t, label: searchFlowTypeLabel(t, s))],
+                        SearchFlowTypeField(
+                          value: _c.type, s: s, bn: bn, chapter: _c.chapter,
+                          guide: _c.source == 'guide', lesson: _c.lesson,
+                          subject: _c.effectiveSubjectId,
+                          schoolClass: _c.effectiveClass,
                           onChanged: (v) => setState(() => _c.type = v),
                         ),
                       ],
