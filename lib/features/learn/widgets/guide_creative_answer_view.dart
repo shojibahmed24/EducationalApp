@@ -6,6 +6,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../core/models/guide_bank_model.dart';
+import 'creative_part_marks.dart';
+import 'digits.dart';
 import 'guide_answer_body.dart';
 import 'guide_creative_part_loader.dart';
 import 'guide_creative_parts.dart';
@@ -52,8 +54,9 @@ class GuideCreativeAnswerView extends StatefulWidget {
 }
 
 class _GuideCreativeAnswerViewState extends State<GuideCreativeAnswerView> {
-  late final List<GuideBankQuestion> _parts =
-      orderedCreativeParts(widget.parts);
+  late final List<GuideBankQuestion> _parts = orderForDisplay(widget.parts);
+  late final List<int?> _marks =
+      creativePartMarks(_parts, marksParts: groupMarksParts(_parts));
   final _states = <String, CreativePartState>{};
   int _selected = 0;
   double _fontSize = 16;
@@ -176,7 +179,10 @@ class _GuideCreativeAnswerViewState extends State<GuideCreativeAnswerView> {
             children: [
               for (var i = 0; i < _parts.length; i++)
                 ChoiceChip(
-                  label: Text(creativePartLabel(i)),
+                  label: Text(_marks[i] == null
+                      ? creativePartLabel(i)
+                      : '${creativePartLabel(i)} · '
+                          '${numStr(_marks[i]!, widget.bn)}'),
                   selected: i == _selected,
                   onSelected: (_) {
                     if (i == _selected) return;

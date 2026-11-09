@@ -6,12 +6,14 @@ import 'package:yes_sir_ai/core/models/guide_bank_model.dart';
 import 'package:yes_sir_ai/features/learn/widgets/creative_part_marks.dart';
 import 'package:yes_sir_ai/features/learn/widgets/guide_creative_parts.dart';
 
-GuideBankQuestion row(String id, int? marks) => GuideBankQuestion(
+GuideBankQuestion row(String id, int? marks, {List<int>? mp}) =>
+    GuideBankQuestion(
       id: id,
       questionText: 'নকল প্রশ্ন $id',
       questionType: 'creative',
       marks: marks,
       stimulusId: 's',
+      marksParts: mp,
     );
 
 void main() {
@@ -89,6 +91,43 @@ void main() {
     test('marks_parts of a different length is not guessed', () {
       final parts = idOrderedParts([row('a-1', 10), row('a-2', 10)]);
       expect(creativePartMarks(parts, marksParts: [2, 4, 4]), [null, null]);
+    });
+  });
+
+  group('model + display order', () {
+    test('server marksParts is normalised on parse', () {
+      final q = GuideBankQuestion.fromServerJson({
+        'id': 'x',
+        'questionText': 'নকল',
+        'questionType': 'creative',
+        'marksParts': {'ক': 2, 'খ': 4, 'গ': 4, 'মোট': 10},
+      });
+      expect(q.marksParts, [2, 4, 4]);
+      expect(GuideBankQuestion.fromJson(q.toJson()).marksParts, [2, 4, 4]);
+    });
+    test('missing marksParts stays null', () {
+      final q = GuideBankQuestion.fromServerJson(
+          {'id': 'x', 'questionText': 'নকল', 'questionType': 'creative'});
+      expect(q.marksParts, isNull);
+    });
+    test('matching marksParts: id order even if row marks are all 10', () {
+      final g = [
+        row('a-3', 10, mp: [2, 4, 4]),
+        row('a-1', 10, mp: [2, 4, 4]),
+        row('a-2', 10, mp: [2, 4, 4]),
+      ];
+      expect(orderForDisplay(g).map((p) => p.id).toList(),
+          ['a-1', 'a-2', 'a-3']);
+      expect(groupMarksParts(g), [2, 4, 4]);
+    });
+    test('no marksParts: old marks-based order', () {
+      final g = [row('a-2', 4), row('a-1', 2)];
+      expect(orderForDisplay(g).map((p) => p.id).toList(), ['a-1', 'a-2']);
+    });
+    test('length mismatch (missing part) falls back, never guesses', () {
+      final g = [row('a-1', 10, mp: [2, 4, 4]), row('a-2', 10, mp: [2, 4, 4])];
+      expect(creativePartMarks(g, marksParts: groupMarksParts(g)),
+          [null, null]);
     });
   });
 }

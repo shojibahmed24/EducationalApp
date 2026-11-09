@@ -1,6 +1,8 @@
 // Guide bank data models (UI-agnostic row shapes). One bank
 // row: verbatim text plus printed-only metadata; absent marks
 // or importance must never be invented (no badge/star).
+import 'creative_marks_parts.dart';
+
 List<String> _stringList(Object? v) =>
     v is List ? v.map((e) => e.toString()).toList() : const [];
 
@@ -35,6 +37,8 @@ class GuideBankQuestion {
   // Guide-native chapter number (migration 011); null = server did not say.
   final int? chapterNumber;
   final String? modelQuestionId; // Phase 3: linked bank model row id.
+  // Creative part marks (ক,খ,গ,ঘ order), normalised; null = unknown.
+  final List<int>? marksParts;
   // Bangla 2nd suggestion rows (Edge list, 2026-11-04): kind,
   // star, chapter text, title, linked bank/nirmiti row ids.
   // Null = server did not say; linked list empty when absent.
@@ -73,6 +77,7 @@ class GuideBankQuestion {
     this.hasSolution,
     this.chapterNumber,
     this.modelQuestionId,
+    this.marksParts,
     this.suggestionKind,
     this.suggestionStar,
     this.suggestionPoricched,
@@ -113,6 +118,7 @@ class GuideBankQuestion {
     'hasSolution': hasSolution,
     'chapterNumber': chapterNumber,
     'modelQuestionId': modelQuestionId,
+    'marksParts': marksParts,
     'suggestionKind': suggestionKind,
     'suggestionStar': suggestionStar,
     'suggestionPoricched': suggestionPoricched,
@@ -145,6 +151,7 @@ class GuideBankQuestion {
       hasSolution: j['hasSolution'] is bool ? j['hasSolution'] as bool : null,
       chapterNumber: (j['chapterNumber'] as num?)?.toInt(),
       modelQuestionId: j['modelQuestionId'] as String?,
+      marksParts: normalizeMarksParts(j['marksParts']),
       suggestionKind: j['suggestionKind'] as String?,
       suggestionStar: j['suggestionStar'] as String?,
       suggestionPoricched: j['suggestionPoricched'] as String?,
@@ -178,6 +185,7 @@ class GuideBankQuestion {
       hasSolution: j['hasSolution'] is bool ? j['hasSolution'] as bool : null,
       chapterNumber: (j['chapterNumber'] as num?)?.toInt(),
       modelQuestionId: j['modelQuestionId'] as String?,
+      marksParts: normalizeMarksParts(j['marksParts']),
       suggestionKind: j['suggestionKind'] as String?,
       suggestionStar: j['suggestionStar'] as String?,
       suggestionPoricched: j['suggestionPoricched'] as String?,
