@@ -111,11 +111,19 @@ void main() {
       expect(find.text('খ-এর নকল গাইড উত্তর', findRichText: true), findsNothing);
     });
 
+    testWidgets('part chips show each part\'s marks', (tester) async {
+      await tester.pumpWidget(buildView());
+      await tester.pump();
+      expect(find.text('ক · ২'), findsOneWidget);
+      expect(find.text('খ · ৪'), findsOneWidget);
+      expect(find.text('গ · ৪'), findsOneWidget);
+    });
+
     testWidgets('switching to খ shows খ answer, stimulus stays',
         (tester) async {
       await tester.pumpWidget(buildView());
       await tester.pump();
-      await tester.tap(find.text('খ'));
+      await tester.tap(find.text('খ · ৪'));
       await tester.pump();
       expect(find.text('নকল উদ্দীপক লেখা', findRichText: true), findsOneWidget);
       expect(find.text('খ) নকল খ অংশ', findRichText: true), findsOneWidget);
@@ -133,7 +141,7 @@ void main() {
       expect(
           find.text(guideBankStringsBn['explainSteps']!), findsOneWidget);
       expect(find.text(guideBankStringsBn['askAi']!), findsOneWidget);
-      await tester.tap(find.text('গ'));
+      await tester.tap(find.text('গ · ৪'));
       await tester.pump();
       expect(find.text(guideBankStringsBn['explainDetailed']!),
           findsOneWidget);
