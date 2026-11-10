@@ -156,11 +156,6 @@ int? normalizeQuestionNumber(String input) {
 /// Live DB lesson value of the chapter-3 appendix (title = value).
 const kChapter3AppendixLesson = 'পরিশিষ্ট';
 
-/// Server filter value for rows whose DB lesson is blank. Shown as
-/// its own row only when the server counted such rows (an old server
-/// matches none, so the row stays hidden).
-const kNoLessonFilter = '__none__';
-
 /// Lessons actually present for a chapter, as
 /// lesson-code -> title. Class 9-10 math guide chapters 2, 3, 7, 8,
 /// 9, 11, 16 have DB-backed lesson rows (math import 2026-11-01;
@@ -171,7 +166,8 @@ const kNoLessonFilter = '__none__';
 /// Chapter 3 also lists its unnumbered appendix 'পরিশিষ্ট' as a
 /// row of its own (11/10/2026), keyed by its live DB lesson value
 /// so the exact-match list filter finds it. Rows whose lesson is
-/// blank in the DB are reached through [kNoLessonFilter].
+/// blank in the DB cannot be filtered server-side; they stay under
+/// the 'সব লেসন' all-option.
 /// Deliberately excluded:
 /// - Chapter 17: its only DB lesson value is '17' (whole chapter),
 ///   so there are no sub-lessons to pick from.

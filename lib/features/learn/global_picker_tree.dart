@@ -143,23 +143,6 @@ GlobalPickerTree buildGlobalPickerTree({
               kind: GlobalPickerNodeKind.lesson,
               pick: GlobalPickerPick.chapterLesson(n, e.key),
             ),
-          if (lessonCountsLine(
-                extras.lessonCounts.of(n, kNoLessonFilter),
-                s,
-                bn,
-              ) !=
-              null)
-            GlobalPickerNode(
-              id: 'lesson:$n:$kNoLessonFilter',
-              title: bn ? 'অন্যান্য (লেসন ছাড়া)' : 'Other (no lesson)',
-              subtitle: lessonCountsLine(
-                extras.lessonCounts.of(n, kNoLessonFilter),
-                s,
-                bn,
-              ),
-              kind: GlobalPickerNodeKind.lesson,
-              pick: GlobalPickerPick.chapterLesson(n, kNoLessonFilter),
-            ),
         ];
       case GlobalPickerNodeKind.section:
         // Bangla 1st only: other section nodes are leaves.
