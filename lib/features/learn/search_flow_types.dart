@@ -153,6 +153,9 @@ int? normalizeQuestionNumber(String input) {
   return n;
 }
 
+/// Live DB lesson value of the chapter-3 appendix (title = value).
+const kChapter3AppendixLesson = 'পরিশিষ্ট';
+
 /// Lessons actually present for a chapter, as
 /// lesson-code -> title. Class 9-10 math guide chapters 2, 3, 7, 8,
 /// 9, 11, 16 have DB-backed lesson rows (math import 2026-11-01;
@@ -160,12 +163,14 @@ int? normalizeQuestionNumber(String input) {
 /// screen shows the lesson dropdown for them. Every other chapter
 /// returns empty, and the screen SKIPS the lesson step entirely
 /// for it.
-/// Deliberately excluded, with rows still reachable via the
-/// dropdown's 'সব লেসন' all-option:
+/// Chapter 3 also lists its unnumbered appendix 'পরিশিষ্ট' as a
+/// row of its own (11/10/2026), keyed by its live DB lesson value
+/// so the exact-match list filter finds it. Rows whose lesson is
+/// blank in the DB cannot be filtered server-side; they stay under
+/// the 'সব লেসন' all-option.
+/// Deliberately excluded:
 /// - Chapter 17: its only DB lesson value is '17' (whole chapter),
 ///   so there are no sub-lessons to pick from.
-/// - 'পরিশিষ্ট' (chapter-3 appendix): not a numbered lesson, so it
-///   has no dropdown entry; its rows appear under 'সব লেসন'.
 Map<String, String> lessonsForChapter(
   String subject,
   int schoolClass,
@@ -178,6 +183,12 @@ Map<String, String> lessonsForChapter(
     case 2:
       return chapter2LessonTitles;
     case 3:
+      return {
+        ...Map.fromEntries(
+          guideLessonTitles.entries.where((e) => e.key.startsWith('3.')),
+        ),
+        kChapter3AppendixLesson: kChapter3AppendixLesson,
+      };
     case 7:
     case 8:
     case 9:

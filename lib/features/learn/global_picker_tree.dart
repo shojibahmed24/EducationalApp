@@ -137,7 +137,7 @@ GlobalPickerTree buildGlobalPickerTree({
           for (final e in lessons.entries)
             GlobalPickerNode(
               id: 'lesson:$n:${e.key}',
-              title: '${e.key} · ${e.value}',
+              title: e.key == e.value ? e.key : '${e.key} · ${e.value}',
               subtitle:
                   lessonCountsLine(extras.lessonCounts.of(n, e.key), s, bn),
               kind: GlobalPickerNodeKind.lesson,

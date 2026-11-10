@@ -97,6 +97,7 @@ void main() {
       '3.3',
       '3.4',
       '3.5',
+      'পরিশিষ্ট',
     ]);
     expect(lessonsForChapter('math', 9, 3)['3.3'], 'উৎপাদকে বিশ্লেষণ');
     expect(lessonsForChapter('math', 9, 7).keys, ['7.1', '7.2']);
@@ -122,8 +123,11 @@ void main() {
     expect(lessonsForChapter('math', 9, 16)['16.3'], 'বৃত্ত সংক্রান্ত পরিমাপ');
     // No sub-lessons: ch17's only DB value is '17' (whole chapter).
     expect(lessonsForChapter('math', 9, 17), isEmpty);
-    // Appendix rows stay reachable via 'সব লেসন', not a dropdown entry.
-    expect(lessonsForChapter('math', 9, 3).containsKey('পরিশিষ্ট'), isFalse);
+    // appendix is its own row since 11/10/2026, after 3.1-3.5
+    final ch3 = lessonsForChapter('math', 9, 3);
+    expect(ch3.keys.toList(),
+        ['3.1', '3.2', '3.3', '3.4', '3.5', 'পরিশিষ্ট']);
+    expect(lessonsForChapter('math', 9, 7).containsKey('পরিশিষ্ট'), isFalse);
     // Other subjects, classes and chapters skip the lesson step.
     expect(lessonsForChapter('science', 9, 2), isEmpty);
     expect(lessonsForChapter('math', 6, 2), isEmpty);
