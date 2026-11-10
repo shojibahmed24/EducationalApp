@@ -97,4 +97,20 @@ void main() {
       expect(lessonCountsLine({SearchFlowType.mcq: 0}, _s, true), isNull);
     });
   });
+
+  test('the no-lesson sentinel is sent as the lesson filter, and a '
+      'server that matches none leaves the row without a line', () async {
+    final log = <Map<String, dynamic>>[];
+    final lc = SearchFlowLessonCounts(
+      onChanged: () {},
+      service: _svc((b) => b['lesson'] == kNoLessonFilter ? 0 : 4, log),
+    );
+    await lc.load(
+        subject: 'math',
+        schoolClass: 9,
+        chapter: 2,
+        lessons: [kNoLessonFilter]);
+    expect(log.any((b) => b['lesson'] == '__none__'), isTrue);
+    expect(lessonCountsLine(lc.of(2, kNoLessonFilter), _s, true), isNull);
+  });
 }

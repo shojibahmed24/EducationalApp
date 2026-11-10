@@ -100,7 +100,10 @@ void onGlobalPickerBranch({
       subject: c.effectiveSubjectId,
       schoolClass: c.effectiveClass,
       chapter: n,
-      lessons: lessonsForChapter(c.subjectId, c.schoolClass, n).keys,
+      lessons: [
+        ...lessonsForChapter(c.subjectId, c.schoolClass, n).keys,
+        kNoLessonFilter,
+      ],
     );
   }
 }
