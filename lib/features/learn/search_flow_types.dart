@@ -8,6 +8,7 @@
 // - Chapter/lesson titles come ONLY from class9_10_math_chapters
 //   (NCTB TOC + guide pilot banners, step 2).
 import '../../core/data/class9_10_math_chapters.dart';
+import '../../core/data/class9_physics_lessons.dart';
 import '../../core/models/guide_bank_model.dart';
 import 'lesson_selection.dart';
 import 'widgets/digits.dart';
@@ -168,6 +169,8 @@ const kChapter3AppendixLesson = 'পরিশিষ্ট';
 /// so the exact-match list filter finds it. Rows whose lesson is
 /// blank in the DB cannot be filtered server-side; they stay under
 /// the 'সব লেসন' all-option.
+/// Class 9 physics lists its chapters' lesson codes the same way
+/// (class9_physics_lessons.dart), shown as the bare code.
 /// Deliberately excluded:
 /// - Chapter 17: its only DB lesson value is '17' (whole chapter),
 ///   so there are no sub-lessons to pick from.
@@ -176,6 +179,13 @@ Map<String, String> lessonsForChapter(
   int schoolClass,
   int chapter,
 ) {
+  if (subject == 'physics' && schoolClass == 9) {
+    // Codes only (no titles in the DB, none invented): key = title.
+    return {
+      for (final code in class9PhysicsLessonCodes[chapter] ?? const <String>[])
+        code: code,
+    };
+  }
   if (subject != 'math' || (schoolClass != 9 && schoolClass != 10)) {
     return const {};
   }
