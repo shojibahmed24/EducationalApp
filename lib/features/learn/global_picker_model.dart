@@ -5,9 +5,12 @@
 // itself is pure data; the screen applies it to the existing
 // controller/extras state or navigates to an existing route, so
 // list/jump behavior underneath never changes.
+import 'search_flow_types.dart';
+
 enum GlobalPickerNodeKind {
   chapter,
   lesson,
+  type,
   section,
   set,
   setsGroup,
@@ -22,6 +25,7 @@ enum GlobalPickerNodeKind {
 enum GlobalPickerPickKind {
   chapter,
   chapterLesson,
+  chapterType,
   section,
   sectionLesson,
   paper2,
@@ -36,9 +40,17 @@ class GlobalPickerPick {
         banglaSection = null,
         paper2Section = null,
         setId = null,
+        type = null,
         route = null;
   const GlobalPickerPick.chapterLesson(this.chapter, this.lesson)
       : kind = GlobalPickerPickKind.chapterLesson,
+        banglaSection = null,
+        paper2Section = null,
+        setId = null,
+        type = null,
+        route = null;
+  const GlobalPickerPick.chapterType(this.chapter, this.lesson, this.type)
+      : kind = GlobalPickerPickKind.chapterType,
         banglaSection = null,
         paper2Section = null,
         setId = null,
@@ -49,12 +61,14 @@ class GlobalPickerPick {
         lesson = null,
         paper2Section = null,
         setId = null,
+        type = null,
         route = null;
   const GlobalPickerPick.sectionLesson(this.banglaSection, this.lesson)
       : kind = GlobalPickerPickKind.sectionLesson,
         chapter = null,
         paper2Section = null,
         setId = null,
+        type = null,
         route = null;
   const GlobalPickerPick.paper2(this.paper2Section)
       : kind = GlobalPickerPickKind.paper2,
@@ -62,6 +76,7 @@ class GlobalPickerPick {
         lesson = null,
         banglaSection = null,
         setId = null,
+        type = null,
         route = null;
   const GlobalPickerPick.set(this.setId)
       : kind = GlobalPickerPickKind.set,
@@ -69,6 +84,7 @@ class GlobalPickerPick {
         lesson = null,
         banglaSection = null,
         paper2Section = null,
+        type = null,
         route = null;
   const GlobalPickerPick.route(this.route)
       : kind = GlobalPickerPickKind.route,
@@ -76,6 +92,7 @@ class GlobalPickerPick {
         lesson = null,
         banglaSection = null,
         paper2Section = null,
+        type = null,
         setId = null;
   final GlobalPickerPickKind kind;
   final int? chapter;
@@ -83,6 +100,7 @@ class GlobalPickerPick {
   final String? banglaSection;
   final String? paper2Section;
   final String? setId;
+  final SearchFlowType? type;
   final String? route;
 }
 

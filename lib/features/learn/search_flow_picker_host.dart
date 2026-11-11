@@ -10,6 +10,7 @@ import '../../core/services/load_connectivity.dart';
 import '../../core/services/picker_cache_service.dart';
 import 'english_search_flow_controller.dart';
 import 'global_picker_model.dart';
+import 'global_picker_type_nodes.dart';
 import 'search_flow_bangla_papers.dart';
 import 'search_flow_browse_extras.dart';
 import 'search_flow_chapter_fetch.dart';
@@ -19,6 +20,10 @@ import 'search_flow_types.dart';
 String? globalPickerSelectedId(
     SearchFlowController c, SearchFlowBrowseExtras extras) {
   if (extras.setId != null) return 'set:${extras.setId}';
+  final t = c.type;
+  if (t != null && c.chapter != null && c.source == 'guide') {
+    return globalPickerTypeId(c.chapter!, c.lesson, t);
+  }
   if (c.lesson != null) {
     if (c.banglaSection != null) {
       return 'lesson:${c.banglaSection}:${c.lesson}';
@@ -71,6 +76,12 @@ void applyGlobalPickerPick({
     case GlobalPickerPickKind.chapter:
       c.chapter = pick.chapter;
       c.lesson = null;
+      break;
+    case GlobalPickerPickKind.chapterType:
+      c.chapter = pick.chapter;
+      c.lesson = pick.lesson;
+      c.type = pick.type;
+      extras.setId = null;
       break;
     case GlobalPickerPickKind.chapterLesson:
       c.chapter = pick.chapter;

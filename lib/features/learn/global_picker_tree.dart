@@ -11,6 +11,7 @@ import '../../l10n/pages/bangla_first_strings.dart';
 import '../../l10n/pages/bangla_second_strings.dart';
 import 'bangla_second_types.dart';
 import 'global_picker_model.dart';
+import 'global_picker_type_nodes.dart';
 import 'search_flow_bangla_papers.dart';
 import 'search_flow_browse_extras.dart';
 import 'search_flow_controller.dart';
@@ -111,9 +112,7 @@ GlobalPickerTree buildGlobalPickerTree({
           id: 'chapter:${ch.$1}',
           title: searchFlowChapterLabel(ch.$1, ch.$2, bn, s),
           kind: GlobalPickerNodeKind.chapter,
-          hasChildren:
-              guide &&
-              lessonsForChapter(c.subjectId, c.schoolClass, ch.$1).isNotEmpty,
+          hasChildren: guide,
           pick: GlobalPickerPick.chapter(ch.$1),
         ),
     ];
@@ -121,17 +120,29 @@ GlobalPickerTree buildGlobalPickerTree({
     loading = c.chaptersLoading;
   }
 
+  List<GlobalPickerNode> typesOf(int n, String? lesson) =>
+      globalPickerTypeNodes(
+        chapter: n,
+        lesson: lesson,
+        counts: extras.lessonCounts,
+        s: s,
+        bn: bn,
+      );
+
   List<GlobalPickerNode>? childrenOf(GlobalPickerNode node) {
     switch (node.kind) {
       case GlobalPickerNodeKind.chapter:
         final n = int.tryParse(node.id.split(':').last) ?? 0;
         final lessons = lessonsForChapter(c.subjectId, c.schoolClass, n);
+        // No lesson rows for this chapter: go straight to the types.
+        if (lessons.isEmpty) return typesOf(n, null);
         return [
           GlobalPickerNode(
             id: 'lesson:$n:all',
             title: s['lessonAll']!,
             subtitle: lessonCountsLine(extras.lessonCounts.of(n, null), s, bn),
             kind: GlobalPickerNodeKind.lesson,
+            hasChildren: true,
             pick: GlobalPickerPick.chapterLesson(n, null),
           ),
           for (final e in lessons.entries)
@@ -141,9 +152,13 @@ GlobalPickerTree buildGlobalPickerTree({
               subtitle:
                   lessonCountsLine(extras.lessonCounts.of(n, e.key), s, bn),
               kind: GlobalPickerNodeKind.lesson,
+              hasChildren: true,
               pick: GlobalPickerPick.chapterLesson(n, e.key),
             ),
         ];
+      case GlobalPickerNodeKind.lesson:
+        final scope = globalPickerParseScope(node.id);
+        return scope == null ? const [] : typesOf(scope.$1, scope.$2);
       case GlobalPickerNodeKind.section:
         // Bangla 1st only: other section nodes are leaves.
         if (!firstMode) return const [];
