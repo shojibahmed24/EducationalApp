@@ -50,4 +50,14 @@ void main() {
     expect(searchFlowLegacyQuestionType(SearchFlowType.oneWord), isNull);
     expect(searchFlowLegacyQuestionType(SearchFlowType.creative), 'creative');
   });
+
+  test('guide-only types never match a textbook row', () {
+    for (final t in searchFlowTypesFor(
+            guide: true, subject: 'chemistry', schoolClass: 9)
+        .sublist(5)) {
+      for (final raw in ['mcq', 'short', 'creative', 'task', 'problem', null]) {
+        expect(searchFlowTextbookMatches(t, raw), isFalse);
+      }
+    }
+  });
 }

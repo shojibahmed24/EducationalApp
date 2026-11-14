@@ -81,6 +81,14 @@ bool searchFlowTextbookMatches(SearchFlowType type, String? raw) {
       return v == 'task';
     case SearchFlowType.textbookExercise:
       return v != 'mcq' && v != 'short' && v != 'creative' && v != 'task';
+    // Guide-only exam kinds (grp_* server groups): textbook rows
+    // carry no such section, so they never match here.
+    case SearchFlowType.oneWord:
+    case SearchFlowType.knowledge:
+    case SearchFlowType.comprehension:
+    case SearchFlowType.mathProblem:
+    case SearchFlowType.otherPractice:
+      return false;
   }
 }
 
