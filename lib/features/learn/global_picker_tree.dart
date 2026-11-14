@@ -127,6 +127,11 @@ GlobalPickerTree buildGlobalPickerTree({
         counts: extras.lessonCounts,
         s: s,
         bn: bn,
+        offered: searchFlowTypesFor(
+          guide: true,
+          subject: c.effectiveSubjectId,
+          schoolClass: c.effectiveClass,
+        ),
       );
 
   List<GlobalPickerNode>? childrenOf(GlobalPickerNode node) {

@@ -11,7 +11,10 @@ import '../../core/data/class9_10_math_chapters.dart';
 import '../../core/data/class9_physics_lessons.dart';
 import '../../core/models/guide_bank_model.dart';
 import 'lesson_selection.dart';
+import 'search_flow_type_options.dart';
 import 'widgets/digits.dart';
+
+export 'search_flow_type_options.dart';
 
 /// Jump outcome for the search screen's "সরাসরি উত্তর" button.
 /// The controller resolves; the screen navigates. Keeping the
@@ -38,21 +41,6 @@ class SearchFlowJumpResult {
   final String? message;
 }
 
-/// The 5 dropdown options — identical in textbook and guide mode.
-/// There is deliberately NO "all questions" option: a list always
-/// loads one type, 20 at a time.
-enum SearchFlowType { mcq, short, creative, practiceWork, textbookExercise }
-
-/// Dropdown label for a search-flow type (moved from the screen so
-/// the screen stays under the line cap).
-String searchFlowTypeLabel(SearchFlowType t, Map<String, String> s) => {
-  SearchFlowType.mcq: s['typeMcq']!,
-  SearchFlowType.short: s['typeShort']!,
-  SearchFlowType.creative: s['typeCreative']!,
-  SearchFlowType.practiceWork: s['typePracticeWork']!,
-  SearchFlowType.textbookExercise: s['typeTextbookExercise']!,
-}[t]!;
-
 /// Chapter dropdown label (moved from the screen so the screen
 /// stays under the line cap). Empty title => the chapter label
 /// plus the number alone, never an invented title.
@@ -61,42 +49,6 @@ String searchFlowChapterLabel(
   final num = numStr(n, bn);
   if (title.isEmpty) return "${s['chapterLabel']} $num";
   return '$num · $title';
-}
-
-/// Guide-bank `section` value for a dropdown option (guide mode).
-String searchFlowGuideSection(SearchFlowType type) {
-  switch (type) {
-    case SearchFlowType.mcq:
-      return 'mcq_bank';
-    case SearchFlowType.short:
-      return 'short';
-    case SearchFlowType.creative:
-      return 'creative';
-    case SearchFlowType.practiceWork:
-      return 'practice_work';
-    case SearchFlowType.textbookExercise:
-      return 'textbook_exercise';
-  }
-}
-
-/// Types with a server-side questionType filter on the OLD guide
-/// server (v7 rows carry question_type but no section/lesson):
-/// only MCQ / short / creative can be filtered client-side there.
-/// practice_work and textbook_exercise need the new server's
-/// section filter — on the old server they are honestly
-/// unavailable, never faked from questionType.
-String? searchFlowLegacyQuestionType(SearchFlowType type) {
-  switch (type) {
-    case SearchFlowType.mcq:
-      return 'mcq';
-    case SearchFlowType.short:
-      return 'short';
-    case SearchFlowType.creative:
-      return 'creative';
-    case SearchFlowType.practiceWork:
-    case SearchFlowType.textbookExercise:
-      return null;
-  }
 }
 
 /// Textbook-mode match for one row's raw question_type value

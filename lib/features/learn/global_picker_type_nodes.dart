@@ -32,14 +32,15 @@ List<GlobalPickerNode> globalPickerTypeNodes({
   required SearchFlowLessonCounts counts,
   required Map<String, String> s,
   required bool bn,
+  List<SearchFlowType> offered = searchFlowBaseTypes,
 }) {
   final known = counts.of(chapter, lesson);
   final types = [
-    for (final t in SearchFlowType.values)
+    for (final t in offered)
       if (known?[t] != 0) t,
   ];
   return [
-    for (final t in types.isEmpty ? SearchFlowType.values : types)
+    for (final t in types.isEmpty ? offered : types)
       GlobalPickerNode(
         id: globalPickerTypeId(chapter, lesson, t),
         title: searchFlowTypeLabel(t, s),

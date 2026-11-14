@@ -47,6 +47,12 @@ class _SearchFlowTypeFieldState extends State<SearchFlowTypeField> {
 
   GuideFlowCountService get _svc => widget.service ?? guideFlowCountService;
 
+  List<SearchFlowType> get _types => searchFlowTypesFor(
+    guide: widget.guide,
+    subject: widget.subject,
+    schoolClass: widget.schoolClass,
+  );
+
   @override
   void initState() {
     super.initState();
@@ -78,6 +84,7 @@ class _SearchFlowTypeFieldState extends State<SearchFlowTypeField> {
       schoolClass: widget.schoolClass,
       chapter: chapter,
       lesson: widget.lesson,
+      types: _types,
     );
     if (!mounted || token != _token) return; // a newer pick won
     setState(() => _counts = out);
@@ -96,7 +103,7 @@ class _SearchFlowTypeFieldState extends State<SearchFlowTypeField> {
       icon: Icons.category,
       value: widget.value,
       items: [
-        for (final t in SearchFlowType.values)
+        for (final t in _types)
           SearchFlowDropdownItem(value: t, label: _label(t)),
       ],
       onChanged: widget.onChanged,

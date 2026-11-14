@@ -43,7 +43,7 @@ void main() {
         tree.childrenOf(ch2)!.firstWhere((n) => n.id == 'lesson:2:2.1');
     expect(lesson.hasChildren, isTrue);
     final types = tree.childrenOf(lesson)!;
-    expect(types.length, SearchFlowType.values.length);
+    expect(types.length, searchFlowBaseTypes.length);
     expect(types.first.id, 'type:2:2.1:${SearchFlowType.values.first.name}');
     expect(types.first.pick?.kind, GlobalPickerPickKind.chapterType);
     expect(types.first.pick?.chapter, 2);
@@ -143,6 +143,6 @@ void main() {
   test('when every count is zero all types stay visible', () async {
     final lc = await loaded((sec) => 0);
     // all-zero counts are stored as unknown-free zeros: nothing hidden
-    expect(typeNodes(lc).length, SearchFlowType.values.length);
+    expect(typeNodes(lc).length, searchFlowBaseTypes.length);
   });
 }

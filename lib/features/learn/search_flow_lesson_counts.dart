@@ -28,6 +28,7 @@ class SearchFlowLessonCounts {
   /// Loads counts for the "all" row and every lesson of a chapter,
   /// once per chapter per call (repeat opens reuse the result).
   Future<void> load({
+    List<SearchFlowType> types = searchFlowBaseTypes,
     required String subject,
     required int schoolClass,
     required int chapter,
@@ -44,6 +45,7 @@ class SearchFlowLessonCounts {
             schoolClass: schoolClass,
             chapter: chapter,
             lesson: lesson,
+            types: types,
           );
           if (out.values.every((v) => v == null)) {
             _requested.remove(k); // nothing known: retry next open

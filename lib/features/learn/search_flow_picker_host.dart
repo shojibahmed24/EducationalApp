@@ -112,6 +112,11 @@ void onGlobalPickerBranch({
       schoolClass: c.effectiveClass,
       chapter: n,
       lessons: lessonsForChapter(c.subjectId, c.schoolClass, n).keys,
+      types: searchFlowTypesFor(
+        guide: true,
+        subject: c.effectiveSubjectId,
+        schoolClass: c.effectiveClass,
+      ),
     );
   }
 }

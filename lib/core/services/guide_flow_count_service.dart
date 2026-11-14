@@ -50,8 +50,8 @@ class GuideFlowCountService {
     required int schoolClass,
     required int chapter,
     String? lesson,
+    List<SearchFlowType> types = searchFlowBaseTypes,
   }) async {
-    final types = SearchFlowType.values;
     final out = await Future.wait([
       for (final t in types)
         count(

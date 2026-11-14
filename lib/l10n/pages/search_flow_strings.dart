@@ -75,6 +75,11 @@ const Map<String, String> searchFlowStringsBn = {
   'typeCreative': 'সৃজনশীল',
   'typePracticeWork': 'অনুশীলনীমূলক কাজ',
   'typeTextbookExercise': 'পাঠ্যবইয়ের অনুশীলনী',
+  'typeOneWord': 'এক কথায় উত্তর',
+  'typeKnowledge': 'জ্ঞানমূলক',
+  'typeComprehension': 'অনুধাবনমূলক',
+  'typeMathProblem': 'গাণিতিক সমস্যা',
+  'typeOtherPractice': 'মৌখিক ও কাজ',
   'practiceWorkWarning':
       'এটা অনুশীলনের জন্য, পাঠ্যবইয়ের সমাধান নয়',
   'showList': 'তালিকা দেখুন',
@@ -178,6 +183,11 @@ const Map<String, String> searchFlowStringsEn = {
   'typeCreative': 'Creative',
   'typePracticeWork': 'Practice work',
   'typeTextbookExercise': 'Textbook exercise',
+  'typeOneWord': 'One-word answer',
+  'typeKnowledge': 'Knowledge',
+  'typeComprehension': 'Comprehension',
+  'typeMathProblem': 'Math problems',
+  'typeOtherPractice': 'Oral & activities',
   'practiceWorkWarning':
       'This is for practice, not a textbook solution',
   'showList': 'Show list',

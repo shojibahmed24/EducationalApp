@@ -14,6 +14,7 @@ class SearchFlowTypeDropdown extends StatelessWidget {
     required this.labels,
     required this.value,
     required this.onChanged,
+    this.types = searchFlowBaseTypes,
   });
   final String label;
 
@@ -22,21 +23,7 @@ class SearchFlowTypeDropdown extends StatelessWidget {
   final Map<String, String> labels;
   final SearchFlowType? value;
   final void Function(SearchFlowType?) onChanged;
-
-  String _label(SearchFlowType t) {
-    switch (t) {
-      case SearchFlowType.mcq:
-        return labels['typeMcq']!;
-      case SearchFlowType.short:
-        return labels['typeShort']!;
-      case SearchFlowType.creative:
-        return labels['typeCreative']!;
-      case SearchFlowType.practiceWork:
-        return labels['typePracticeWork']!;
-      case SearchFlowType.textbookExercise:
-        return labels['typeTextbookExercise']!;
-    }
-  }
+  final List<SearchFlowType> types;
 
   @override
   Widget build(BuildContext context) {
@@ -47,10 +34,10 @@ class SearchFlowTypeDropdown extends StatelessWidget {
       ),
       value: value,
       items: [
-        for (final t in SearchFlowType.values)
+        for (final t in types)
           DropdownMenuItem<SearchFlowType>(
             value: t,
-            child: Text(_label(t)),
+            child: Text(searchFlowTypeLabel(t, labels)),
           ),
       ],
       onChanged: onChanged,
