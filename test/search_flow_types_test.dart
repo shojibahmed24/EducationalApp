@@ -18,7 +18,10 @@ void main() {
       searchFlowGuideSection(SearchFlowType.textbookExercise),
       'textbook_exercise',
     );
-    expect(SearchFlowType.values.length, 5);
+    // The five original options; the extra guide-only types are
+    // covered in search_flow_type_options_test.dart.
+    expect(searchFlowBaseTypes.length, 5);
+    expect(SearchFlowType.values.length, 10);
   });
 
   test('old-server legacy questionType exists only for mcq/short/creative', () {

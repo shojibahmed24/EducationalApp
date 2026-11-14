@@ -54,19 +54,24 @@ List<SearchFlowType> searchFlowTypesFor({
   if (guide && schoolClass == 9) ...?_extraGuideTypes[subject],
 ];
 
+/// String-map key of each type's label. Looked up lazily: only the
+/// asked type's key must exist in the strings map.
+const _labelKeys = {
+  SearchFlowType.mcq: 'typeMcq',
+  SearchFlowType.short: 'typeShort',
+  SearchFlowType.creative: 'typeCreative',
+  SearchFlowType.practiceWork: 'typePracticeWork',
+  SearchFlowType.textbookExercise: 'typeTextbookExercise',
+  SearchFlowType.oneWord: 'typeOneWord',
+  SearchFlowType.knowledge: 'typeKnowledge',
+  SearchFlowType.comprehension: 'typeComprehension',
+  SearchFlowType.mathProblem: 'typeMathProblem',
+  SearchFlowType.otherPractice: 'typeOtherPractice',
+};
+
 /// Dropdown label for a search-flow type.
-String searchFlowTypeLabel(SearchFlowType t, Map<String, String> s) => {
-  SearchFlowType.mcq: s['typeMcq']!,
-  SearchFlowType.short: s['typeShort']!,
-  SearchFlowType.creative: s['typeCreative']!,
-  SearchFlowType.practiceWork: s['typePracticeWork']!,
-  SearchFlowType.textbookExercise: s['typeTextbookExercise']!,
-  SearchFlowType.oneWord: s['typeOneWord']!,
-  SearchFlowType.knowledge: s['typeKnowledge']!,
-  SearchFlowType.comprehension: s['typeComprehension']!,
-  SearchFlowType.mathProblem: s['typeMathProblem']!,
-  SearchFlowType.otherPractice: s['typeOtherPractice']!,
-}[t]!;
+String searchFlowTypeLabel(SearchFlowType t, Map<String, String> s) =>
+    s[_labelKeys[t]!]!;
 
 /// Guide-bank `section` value for a dropdown option (guide mode).
 /// The grp_* names are server-side groups of raw section names.
