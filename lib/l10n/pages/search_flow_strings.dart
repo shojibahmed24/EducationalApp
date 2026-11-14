@@ -80,6 +80,8 @@ const Map<String, String> searchFlowStringsBn = {
   'typeComprehension': 'অনুধাবনমূলক',
   'typeMathProblem': 'গাণিতিক সমস্যা',
   'typeOtherPractice': 'মৌখিক ও কাজ',
+  'typeActivity': 'অনুশীলনমূলক কাজ',
+  'typeExerciseMcq': 'অনুশীলনীর বহুনির্বাচনি',
   'practiceWorkWarning':
       'এটা অনুশীলনের জন্য, পাঠ্যবইয়ের সমাধান নয়',
   'showList': 'তালিকা দেখুন',
@@ -188,6 +190,8 @@ const Map<String, String> searchFlowStringsEn = {
   'typeComprehension': 'Comprehension',
   'typeMathProblem': 'Math problems',
   'typeOtherPractice': 'Oral & activities',
+  'typeActivity': 'Activities',
+  'typeExerciseMcq': 'Exercise MCQs',
   'practiceWorkWarning':
       'This is for practice, not a textbook solution',
   'showList': 'Show list',

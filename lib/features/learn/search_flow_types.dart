@@ -88,6 +88,9 @@ bool searchFlowTextbookMatches(SearchFlowType type, String? raw) {
     case SearchFlowType.comprehension:
     case SearchFlowType.mathProblem:
     case SearchFlowType.otherPractice:
+      case SearchFlowType.exercise:
+      case SearchFlowType.activity:
+      case SearchFlowType.exerciseMcq:
       return false;
   }
 }

@@ -18,6 +18,9 @@ enum SearchFlowType {
   comprehension,
   mathProblem,
   otherPractice,
+  exercise,
+  activity,
+  exerciseMcq,
 }
 
 /// The five original options (textbook mode and every subject
@@ -44,15 +47,33 @@ const _extraGuideTypes = <String, List<SearchFlowType>>{
   'civics': [SearchFlowType.knowledge, SearchFlowType.comprehension],
 };
 
+/// Class 9 Higher Math keeps its textbook exercise, activity and
+/// exercise MCQs under their own section names (exercise, activity,
+/// exercise-mcq), none under textbook_exercise / practice_work, so
+/// it lists its own three instead of those two base types.
+const _higherMathTypes = [
+  SearchFlowType.mcq,
+  SearchFlowType.short,
+  SearchFlowType.creative,
+  SearchFlowType.exercise,
+  SearchFlowType.activity,
+  SearchFlowType.exerciseMcq,
+];
+
 /// Types a dropdown / picker offers. Extras only in guide mode.
 List<SearchFlowType> searchFlowTypesFor({
   required bool guide,
   required String subject,
   required int schoolClass,
-}) => [
-  ...searchFlowBaseTypes,
-  if (guide && schoolClass == 9) ...?_extraGuideTypes[subject],
-];
+}) {
+  if (guide && schoolClass == 9 && subject == 'higher-math') {
+    return _higherMathTypes;
+  }
+  return [
+    ...searchFlowBaseTypes,
+    if (guide && schoolClass == 9) ...?_extraGuideTypes[subject],
+  ];
+}
 
 /// String-map key of each type's label. Looked up lazily: only the
 /// asked type's key must exist in the strings map.
@@ -67,6 +88,9 @@ const _labelKeys = {
   SearchFlowType.comprehension: 'typeComprehension',
   SearchFlowType.mathProblem: 'typeMathProblem',
   SearchFlowType.otherPractice: 'typeOtherPractice',
+  SearchFlowType.exercise: 'typeTextbookExercise',
+  SearchFlowType.activity: 'typeActivity',
+  SearchFlowType.exerciseMcq: 'typeExerciseMcq',
 };
 
 /// Dropdown label for a search-flow type.
@@ -86,6 +110,9 @@ String searchFlowGuideSection(SearchFlowType type) => {
   SearchFlowType.comprehension: 'grp_comprehension',
   SearchFlowType.mathProblem: 'grp_math_problem',
   SearchFlowType.otherPractice: 'grp_other_practice',
+  SearchFlowType.exercise: 'grp_exercise',
+  SearchFlowType.activity: 'grp_activity',
+  SearchFlowType.exerciseMcq: 'grp_exercise_mcq',
 }[type]!;
 
 /// Types with a server-side questionType filter on the OLD guide

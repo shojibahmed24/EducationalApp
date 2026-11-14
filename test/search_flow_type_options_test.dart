@@ -27,6 +27,19 @@ void main() {
         [SearchFlowType.knowledge, SearchFlowType.comprehension]);
   });
 
+  test('higher math lists its own exercise, activity and exercise MCQs', () {
+    expect(types('higher-math'), [
+      SearchFlowType.mcq,
+      SearchFlowType.short,
+      SearchFlowType.creative,
+      SearchFlowType.exercise,
+      SearchFlowType.activity,
+      SearchFlowType.exerciseMcq,
+    ]);
+    expect(types('higher-math', guide: false), searchFlowBaseTypes);
+    expect(types('higher-math', cls: 10), searchFlowBaseTypes);
+  });
+
   test('math, textbook mode and other classes keep the base five', () {
     expect(types('math'), searchFlowBaseTypes);
     expect(types('chemistry', guide: false), searchFlowBaseTypes);
@@ -42,6 +55,9 @@ void main() {
       'grp_comprehension',
       'grp_math_problem',
       'grp_other_practice',
+      'grp_exercise',
+      'grp_activity',
+      'grp_exercise_mcq',
     ]);
     expect(searchFlowGuideSection(SearchFlowType.mcq), 'mcq_bank');
   });
