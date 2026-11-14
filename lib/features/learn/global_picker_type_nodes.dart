@@ -2,7 +2,10 @@
 // / lesson row the question types are listed with their exact
 // counts, so the picker alone fixes chapter + lesson + type. A
 // count that is not known yet (still loading, old server) is
-// left off, never guessed; a known zero stays visible as "০".
+// left off, never guessed. A type whose count is a known zero is
+// hidden (chemistry has no textbook-exercise rows, so that row
+// would only lead to an empty list); if every type is zero all
+// stay visible, so a chapter never shows an empty step.
 import 'global_picker_model.dart';
 import 'search_flow_lesson_counts.dart';
 import 'search_flow_types.dart';
@@ -31,8 +34,12 @@ List<GlobalPickerNode> globalPickerTypeNodes({
   required bool bn,
 }) {
   final known = counts.of(chapter, lesson);
-  return [
+  final types = [
     for (final t in SearchFlowType.values)
+      if (known?[t] != 0) t,
+  ];
+  return [
+    for (final t in types.isEmpty ? SearchFlowType.values : types)
       GlobalPickerNode(
         id: globalPickerTypeId(chapter, lesson, t),
         title: searchFlowTypeLabel(t, s),

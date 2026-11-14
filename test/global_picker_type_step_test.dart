@@ -3,11 +3,13 @@
 // type in one tap. Tree tests use snapshots only (no I/O).
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:yes_sir_ai/core/services/guide_flow_count_service.dart';
 import 'package:yes_sir_ai/features/learn/global_picker_model.dart';
 import 'package:yes_sir_ai/features/learn/global_picker_tree.dart';
 import 'package:yes_sir_ai/features/learn/global_picker_type_nodes.dart';
 import 'package:yes_sir_ai/features/learn/search_flow_browse_extras.dart';
 import 'package:yes_sir_ai/features/learn/search_flow_controller.dart';
+import 'package:yes_sir_ai/features/learn/search_flow_lesson_counts.dart';
 import 'package:yes_sir_ai/features/learn/search_flow_picker_host.dart';
 import 'package:yes_sir_ai/features/learn/search_flow_types.dart';
 import 'package:yes_sir_ai/l10n/pages/search_flow_strings.dart';
@@ -101,5 +103,46 @@ void main() {
     expect(extras.setId, isNull);
     expect(globalPickerSelectedId(c, extras),
         globalPickerTypeId(2, '2.2', SearchFlowType.creative));
+  });
+
+  Future<SearchFlowLessonCounts> loaded(int Function(String section) n) async {
+    final lc = SearchFlowLessonCounts(
+      onChanged: () {},
+      service: GuideFlowCountService(post: (b, {endpoint}) async => {
+            'found': true,
+            'total': n(b['section'] as String),
+            'lesson': b['lesson'],
+            'section': b['section'],
+          }),
+    );
+    await lc.load(
+        subject: 'chemistry', schoolClass: 9, chapter: 3, lessons: const []);
+    return lc;
+  }
+
+  List<GlobalPickerNode> typeNodes(SearchFlowLessonCounts lc) =>
+      globalPickerTypeNodes(
+        chapter: 3,
+        lesson: null,
+        counts: lc,
+        s: searchFlowStringsBn,
+        bn: true,
+      );
+
+  test('types with a known zero count are hidden', () async {
+    final lc = await loaded((sec) =>
+        const {'mcq_bank': 350, 'short': 72, 'creative': 48}[sec] ?? 0);
+    final names = typeNodes(lc).map((n) => n.pick!.type).toSet();
+    expect(names, {
+      SearchFlowType.mcq,
+      SearchFlowType.short,
+      SearchFlowType.creative,
+    });
+  });
+
+  test('when every count is zero all types stay visible', () async {
+    final lc = await loaded((sec) => 0);
+    // all-zero counts are stored as unknown-free zeros: nothing hidden
+    expect(typeNodes(lc).length, SearchFlowType.values.length);
   });
 }
